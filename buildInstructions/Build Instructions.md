@@ -121,7 +121,7 @@ the sensors and back. The junction should be at least 1 m from the sensors. (x4)
 * Wire up the junction as below using parts listed in the Materials Required / Junction section.
 
 ![Junction Schematic](junctionSchematic.png "Junction Schematic")
-![Junction Picture](junctionPicture.png "Junction Picture")
+![Junction Picture](junctionPicture.jpg "Junction Picture")
 
 *	Connect the junction to the circuit.
 	+	Attach the male ribbon cable connectors to either end of the ribbon cable.
