@@ -13,7 +13,7 @@ meta:
 
 The phantom consists of a custom half-circle printed circuit board (PCB) glued to a 3D printed frame. The phantom coordinate frame is defined in Figure 1. The centre of the top surface of the printed frame is the origin of the phantom coordinate frame, with the top surface acting as the XY plane. One surface of the PCB hosts four isosceles triangles of wire, each with a 3-mm base, tangentially oriented with respect to the PCB’s rounded edge that makes the wire segment. The PCB sits in the XZ plane of the phantom coordinate frame. The wire segments are arranged at 15°, 25°, 60°, and 70° polar (theta) angles respectively, out 6.5 mm radially from the origin. Current runs up one long edge of the triangle, across the wire segment, and down the other edge. The magnetic fields due to the long edges essentially cancel each other out because the currents are anti-parallel and radially oriented to the closest sensors. Thus, the MEG sensors are predominantly sensitive to the 3-mm long stretch of current, which is effectively isolated in space. Four HPI coils are secured to equally spaced mounts forming a square in the XY plane. The HPI coils and wire segments are connected to twisted wires that connect to the circuit driver.
 
-![Phantom with Coordinate Frame](phantomPic.jpg "Phantom with Coordinate Frame")
+![Phantom with Coordinate Frame](pictures/phantomPic.jpg "Phantom with Coordinate Frame")
 
 ###The Current Driver Circuit and the Junction
 
@@ -23,7 +23,7 @@ A custom-built current driver circuit sends signals to each source. It generates
 ## Set Up Guidelines
 The phantom is placed inside the sensor array and the junction is hooked up to the current driver circuit via the ribbon cable. The junction can be within the magnetic shielding but should be at least 1m away from the sensor array to limit any magnetic interference. The current driver circuit must be completely outside of the magnetic shield.
 
-![Phantom in the Cylindrical Shield](phantomInShield.jpg "Phantom in the Cylindrical Shield")
+![Phantom in the Cylindrical Shield](pictures/phantomInShield.jpg "Phantom in the Cylindrical Shield")
 
 ## Activating the Sources
 
@@ -89,7 +89,7 @@ the sensors and back. The junction should be at least 1 m from the sensors. (x4)
 		+	Cut the loop open. You should have two pieces of wire twisted together. 
 		+	Label all four wire ends with the same number: 1, 2, 3, or 4 corresponding to the four dipoles. 
 
-![Twisted Wires](twistedWires.jpg "Twisted Wires")
+![Twisted Wires](pictures/twistedWires.jpg "Twisted Wires")
 
 *	Make a wire bundle from the 4 twisted wire sets
 	-	Mount a screwdriver in the drill chuck with the handle sticking out. 
@@ -100,7 +100,7 @@ the sensors and back. The junction should be at least 1 m from the sensors. (x4)
 	-	Once the wires are twisted together, disconnect them from the drill. 
 	-	Strip the ends of all the exposed wire tips (16 total) to prepare for soldering.
 
-![How to Twist Wires](drillTwistingWires.jpg "How to Twist Wires")
+![How to Twist Wires](pictures/drillTwistingWires.jpg "How to Twist Wires")
 
 *	Attach wire bundle to PCB board
 	-	Solder each twisted wire set to the corresponding solder points on the PCB board. 
@@ -116,12 +116,12 @@ the sensors and back. The junction should be at least 1 m from the sensors. (x4)
 
 * Wire up the main circuit to the Arduino as below using parts listed in the Materials Required / Junction section.
 
-![Circuit Layout](circuitLayout.png "Circuit Layout")
+![Circuit Layout](pictures/circuitLayout.png "Circuit Layout")
 
 * Wire up the junction as below using parts listed in the Materials Required / Junction section.
 
-![Junction Schematic](junctionSchematic.png "Junction Schematic")
-![Junction Picture](junctionPicture.jpg "Junction Picture")
+![Junction Schematic](pictures/junctionSchematic.png "Junction Schematic")
+![Junction Picture](pictures/junctionPicture.jpg "Junction Picture")
 
 *	Connect the junction to the circuit.
 	+	Attach the male ribbon cable connectors to either end of the ribbon cable.
@@ -138,7 +138,7 @@ the sensors and back. The junction should be at least 1 m from the sensors. (x4)
 * Slide the HPI coil (with the attached Tagederm) down the needle, keeping the needlepoint centred on the mount.
 * Pull the needle out. The HPI coil should now be centred on the mount
 
-![HPI Placement](hpiPlacement.jpg "HPI Placement")
+![HPI Placement](pictures/hpiPlacement.jpg "HPI Placement")
 
 # References
 M. Hamalainen, R.Hari, R. J. Ilmoniemi, J. Knuutila, O. V. Lounasmaa, “Magnetoencephalography Theory, Instrumentation, and Applications to Noninvasive Studies of the Working Human Brain”,Reviews of Modern Physics, vol. 65, (1993).
