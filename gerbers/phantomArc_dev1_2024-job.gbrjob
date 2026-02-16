@@ -5,17 +5,17 @@
       "Application": "Pcbnew",
       "Version": "7.0.9"
     },
-    "CreationDate": "2024-02-29T12:55:39-04:00"
+    "CreationDate": "2026-02-16T10:34:39-04:00"
   },
   "GeneralSpecs": {
     "ProjectId": {
-      "Name": "phantomArc",
-      "GUID": "7068616e-746f-46d4-9172-632e6b696361",
-      "Revision": "v0.1"
+      "Name": "phantomArc_dev1_2024",
+      "GUID": "7068616e-746f-46d4-9172-635f64657631",
+      "Revision": "v0.2"
     },
     "Size": {
-      "X": 130.0254,
-      "Y": 65.0254
+      "X": 140.1,
+      "Y": 70.1
     },
     "LayerNumber": 2,
     "BoardThickness": 1.6,
@@ -32,47 +32,47 @@
   ],
   "FilesAttributes": [
     {
-      "Path": "phantomArc-F_Cu.gbr",
+      "Path": "phantomArc_dev1_2024-F_Cu.gbr",
       "FileFunction": "Copper,L1,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "phantomArc-B_Cu.gbr",
+      "Path": "phantomArc_dev1_2024-B_Cu.gbr",
       "FileFunction": "Copper,L2,Bot",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "phantomArc-F_Paste.gbr",
+      "Path": "phantomArc_dev1_2024-F_Paste.gbr",
       "FileFunction": "SolderPaste,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "phantomArc-B_Paste.gbr",
+      "Path": "phantomArc_dev1_2024-B_Paste.gbr",
       "FileFunction": "SolderPaste,Bot",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "phantomArc-F_Silkscreen.gbr",
+      "Path": "phantomArc_dev1_2024-F_Silkscreen.gbr",
       "FileFunction": "Legend,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "phantomArc-B_Silkscreen.gbr",
+      "Path": "phantomArc_dev1_2024-B_Silkscreen.gbr",
       "FileFunction": "Legend,Bot",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "phantomArc-F_Mask.gbr",
+      "Path": "phantomArc_dev1_2024-F_Mask.gbr",
       "FileFunction": "SolderMask,Top",
       "FilePolarity": "Negative"
     },
     {
-      "Path": "phantomArc-B_Mask.gbr",
+      "Path": "phantomArc_dev1_2024-B_Mask.gbr",
       "FileFunction": "SolderMask,Bot",
       "FilePolarity": "Negative"
     },
     {
-      "Path": "phantomArc-Edge_Cuts.gbr",
+      "Path": "phantomArc_dev1_2024-Edge_Cuts.gbr",
       "FileFunction": "Profile",
       "FilePolarity": "Positive"
     }
