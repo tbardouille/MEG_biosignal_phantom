@@ -2,7 +2,7 @@
 
 ### Carson D. Leslie, Clara Knox, Timothy Bardouille
 ### Background:
-Advances in quantum magnetometry are increasing the global adoption of magnetoencephalography (MEG). Optically Pumped Magnetometers (OPMs) provide a cryogen-free alternative to traditional SQUID-based systems, enabling wearable and movement-tolerant MEG configurations (Tierney et al., 2019; edersen et al., 2022). Because OPMs operate in the nanotesla regime, magnetic shielding is essential. Common approaches include magnetically shielded rooms (MSRs) and portable cylindrical mu-metal shields, such as the dual-layer Mu-80 cylindrical system used in the Dalhousie Biosignal Lab (Holmes et al.,15
+Advances in quantum magnetometry are increasing the global adoption of magnetoencephalography (MEG). Optically Pumped Magnetometers (OPMs) provide a cryogen-free alternative to traditional SQUID-based systems, enabling wearable and movement-tolerant MEG configurations (Tierney et al., 2019; Pedersen et al., 2022). Because OPMs operate in the nanotesla regime, magnetic shielding is essential. Common approaches include magnetically shielded rooms (MSRs) and portable cylindrical mu-metal shields, such as the dual-layer Mu-80 cylindrical system used in the Dalhousie Biosignal Lab (Holmes et al.,15
 2022; Jodko-Władzińska et al., 2020; Bardouille et al., 2024). Validation of these systems relies on phantom-based localization testing, where known current dipoles are reconstructed via inverse modeling. Prior studies report localization errors (LE) in the 1–5 mm range across OPM and SQUID systems, though a universally adopted phantom standard has yet to emerge. Examples of these studies are as follows:
 
 | Study | Study Type | Reported LE | Link |
@@ -93,16 +93,16 @@ Both MEG systems at CHOP employed full head sensor arrays with single-axis senso
 
 
 #### OPM Data Processing 
-Once acquired, OPM data were processed using MNE-Python version 1.11.0. To start, we loaded raw FIF data and extracted stimulus onsets from the driver/stim channel using peak detection (SciPy v 1.15.1) with 100-sample minimum peak-peak distance and a 0.4 s event time.. Continous noise data were cleaned by applying a 60 Hz line-noise notch filter and a 3–20 Hz band-pass filter in MNE-Python, and inspecting time courses and power spectra using MNE-Python with Matplotlib to manually identify and remove noisy or faulty channels. Before localization reference array regression (RAR) and homogeneous field correction (HFC) were applied to better filter environmental signals. Finally data were epoched around each event with applied baseline correction between -0.200 s and -0.150 s, then averaged over our 100 trials.
+Once acquired, OPM data were processed using MNE-Python version 1.11.0. To start, we loaded raw FIF data and extracted stimulus onsets from the driver/stim channel using peak detection (SciPy v 1.15.1) with 100-sample minimum peak-peak distance and a 0.4 s event time.. Continous noise data were cleaned by applying a 60 Hz line-noise notch filter and a 3–20 Hz band-pass filter in MNE-Python, and inspecting time courses and power spectra using MNE-Python with Matplotlib to manually identify and remove noisy or faulty channels. Before localization reference array regression (RAR) and homogeneous field correction (HFC) (Tierney et al., 2021) were applied to better filter environmental signals. Finally data were epoched around each event with applied baseline correction between -0.200 s and -0.150 s, then averaged over our 100 trials.
 #### CTF Data Processing 
-Similar to the OPM data, CTF scans and were preprocessed using MNE-python, although our process differed for the HPI and ECD coils. HPI scans were filtered using 3rd order synthetic gradietn compensation, and bandpasses between 1 and 20 Hz. Epochs were baselined between -0.175 s and -0.125 s and averaged to create our evoked respones. For the ECD scans, we applied zeroth order gradient compensation and temporal signal space separation (tSSS) in 10 s increments. Data were then low passed using a fourth order butterworth filter at 30 Hz. For both ECD and HPI scans, peak detection remained consistent with OPM data.
+Similar to the OPM data, CTF scans and were preprocessed using MNE-python, although our process differed for the HPI and ECD coils. HPI scans were filtered using 3rd order synthetic gradietn compensation, and bandpasses between 1 and 20 Hz. Epochs were baselined between -0.175 s and -0.125 s and averaged to create our evoked respones. For the ECD scans, we applied zeroth order gradient compensation and temporal signal space separation (tSSS) (Holmes et al., 2023) in 10 s increments. Data were then low passed using a fourth order butterworth filter at 30 Hz. For both ECD and HPI scans, peak detection remained consistent with OPM data. Datasets 6-11 included a double activation, meaning HPI dipoles 1 and 2 were active at the same time. To remedy this, half of the sensors (split by hemisphere) were ignored for all double activation trials when localizing HPI 1 or 2. 
 
 #### Localization
 HPI localization followed the same procedure for both OPM and CTF datasets. Once epochs were obtained, we estimate the position and orientation of a magnetic dipole from measured MEG magnetic field data. An initial estimate of the dipole position is first defined to guide the optimization. The geometry of the MEG sensors is then constructed from the measurement information so that the physical location and orientation of each coil is known. To properly weight the measurements during fitting, a noise covariance model is used to compute a whitening transformation, which normalizes the sensor data according to the expected noise level in each channel. This "ad-hoc" whitener is computed via MNE-Covariance. 
 
-A set of candidate dipole positions is generated within the measurement region to provide reasonable starting points for the fitting procedure. For each candidate position, the expected magnetic field pattern at the sensors is calculated using a magnetic dipole forward model (Eq. 4). The forward solution is then optimized to minimize residuals, and the best candidate location is selected.
+A set of candidate dipole positions is generated within the measurement region to provide reasonable starting points for the fitting procedure. For each candidate position, the expected magnetic field pattern at the sensors is calculated using a magnetic dipole forward model (Eq. 4). The forward solution is then optimized to minimize residuals, and the best candidate location is selected. This process is performed via MNE's "fit_magnetic_dipole".
 
-ECD localization proceeds in a similar fashion, using Equation 4 to generate a forward model. The geometry of the ECD coil sensors is constructed using the same procedure used for the HPI coils. The unwhitened measured data is then scaled to prevent floating-point errors during the least-squares optimization. Using three time points (0 ± 1 ms), the dipole moment is calculated for the candidate position, with the moment constrained to remain the same across all time points. Residuals are then computed by evaluating the difference between the expected and simulated lead fields. A new dipole position is subsequently searched using a nonlinear least-squares optimization implemented with SciPy. The optimization is initialized using the expected ECD positions expressed in the MNE coordinate frame. After the fitting procedure is complete, the results are rescaled to undo the earlier data scaling.
+ECD localization proceeds in a similar fashion, using Equation 4 to generate a forward model. The geometry of the ECD coil sensors is constructed using the same procedure used for the HPI coils. For the OPM dataset, ECD epochs are whitened using the same ad-hoc whitening procedure as HPI coils. Positions were optimzied using MNE's "fit dipole" function with a generated 8 cm radius sphere centered at the origin, mimicking our phantom dimensions. This process was unsuccessful in localizing CTF data, and required a pivot to a new method. For CTF ECD scans, the unwhitened measured data was scaled to prevent floating-point errors during the least-squares optimization in a custom designed infinite dipole fitting function (see attached code "fit_infinite_ecd"). Using three time points (0 ± 1 ms), the dipole moment is calculated for the candidate position, with the moment constrained to remain the same across all time points. Residuals are then computed by evaluating the difference between the expected and simulated lead fields. A new dipole position is subsequently searched using a nonlinear least-squares optimization implemented with SciPy. The optimization is initialized using the expected ECD positions expressed in the MNE coordinate frame. After the fitting procedure is complete, the results are rescaled to undo the earlier data scaling.
 
 Resulting HPI locations are then transformed into the phantom's coordinate frame using point-cloud alignment with the known coil positions. This same transformation matrix is then applied to ECD positions, giving us our localizations. 
 
@@ -126,19 +126,18 @@ Figure 3: Post-processing evoked response for ECD 1. This topography displays th
 
 </figure>
 
-Here, we can see a strong evoked response of ~ 1000 fT, with a slight increase for dataset 9 over dataset 1. Similarily, Figure X displays the post-processed evoked topography for HPI 1, dataset 1. 
+Here, we can see a strong evoked response of ~ 1000 fT, with a slight increase for dataset 9 over dataset 1. Similarily, Figure 4 displays the post-processed evoked topography for HPI 1, dataset 1. 
 
 <figure align="center">
 
-<img src="HPI_CTF_D1_Butterfly.png" width="600">
+<img src="HPI_CTF_D1_topo.png" width="600">
 
 <figcaption>
-Figure X: Post-processing evoked topography for HPI 1, dataset 1. Each evoked response is averaged over 100 trials. 
+Figure 4: Post-processing evoked topography for HPI 1, dataset 1. Each evoked response is averaged over 100 trials. The colourbar ranges from -2e-13 to 18e13.
 </figcaption>
 
 </figure>
 
-Similiarly, Figure X shows a strong response of 2000-6000 fT. 
 
 #### CTF vs OPM Localization 
 
@@ -146,7 +145,7 @@ Using the evoked responses, localization accuracies for both the HPI and ECD coi
 
 <figure>
 <figcaption>
-Table 1: OPM vs CTF Localization statistics. Here, source represents the type of dipole, while index clarifies which. LE represents localization accuracy, and is reported for the phantom's x, y, and z directions per system. All LE values are in mm. 
+Table 1: OPM vs CTF Localization statistics. Here, source represents the type of dipole, while index clarifies which. LE represents localization accuracy, and is reported for the phantom's X, Y, and Z directions per system. All LE values are in mm. 
 </figcaption>
 <table>
 <thead>
@@ -251,9 +250,86 @@ Table 3: OPM vs CTF Goodness of Fit (GOF), amplitude, and moment. Here, source a
 
 </figure>
 
+To better analyze the bias between trials, we can evaluate the HPI localizations across all datasets. To better observe localization errors, we translated each data point inward such that the expected radius is reduced by 4.75 cm. This allows us to clearly see differences between each dataset, and is shown in Figure 5.
 
 
+<figure align="center">
+
+<img src="Shifted_HPI_data.png" width="600">
+
+<figcaption>
+Figure 5: Shifted HPI localizations for CTF (top) and OPM (bottom) datasets. The X represents the localizations where we expect the HPI coils to be. Blue, orange, green, and red correspond to measured positions across all datasets.
+</figcaption>
+
+</figure>
 
 ### Discussion
 
+#### Comparsion of Datasets
+After analyzing the data, there is a clear bias in the -Y localization errors of the ECD coils. This is present across all ECD dipoles, being ~ 3mm for OPM data and ~ 6mm for CTF data. This was a surprising result, as we expected CTF data to serve as a ground truth for localization accuracy. While we are unsure of the root cause, we suspect fabrication errors due to the dismanting during travel from Halifax to Philidelphia. This may have offset the positions of the HPI or ECD coils, causing the bias. There was no obserable bias in the HPI coils in a set direction, although Figure 5 suggests an inward shift in the radial direction. Given Figures 1-4 suggest clean data, this likely points to mechanical errors within the phantom.
+
+#### Future Direction 
+
+Immediate next steps include a redesign of the phantom. New builds are already in progress, and will need to be tested to ensure accuracy across multiple sites (Halifax, Stockhold, Netherlands). More capabilites (different frequency simultaneous waves, increased dipoles, stronger structure) may be implemented to continue advancing this device. The continued development of the phantom is vital to future MEG system validation. 
+
 ### References
+
+Bardouille, T., Smith, V., Vajda, E., Leslie, C. D., & Holmes, N. (2024).  
+Noise reduction and localization accuracy in a mobile magnetoencephalography system.  
+*Sensors, 24*, 3503.
+
+Bastola, S., Jahromi, S., Chikara, R., Stufflebeam, S. M., Ottensmeyer, M. P., De Novi, G., Papadelis, C., & Alexandrakis, G. (2024).  
+Improved dipole source localization from simultaneous MEG–EEG data by combining a global optimization algorithm with a local parameter search: A brain phantom study.  
+*Bioengineering, 11*, 897.
+
+Boto, E., Shah, V., Hill, R. M., Rhodes, N., Osborne, J., Doyle, C., Holmes, N., Rea, M., Leggett, J., Bowtell, R., et al. (2022).  
+Triaxial detection of the neuromagnetic field using optically pumped magnetometry: Feasibility and application in children.  
+*NeuroImage, 252*, 119027.
+
+Cao, F., Gao, Z., Qi, S., Chen, K., Xiang, M., An, N., & Ning, X. (2023).  
+Realistic three-layer head phantom for optically pumped magnetometer-based magnetoencephalography.  
+*Computers in Biology and Medicine, 164*, 107318.
+
+Cohen, D., & Cuffin, B. N. (1991).  
+EEG versus MEG localization accuracy: Theory and experiment.  
+*Brain Topography, 4*, 95–103.
+
+Holmes, N., Bowtell, R., Brookes, M. J., & Taulu, S. (2023).  
+An iterative implementation of the signal space separation method for magnetoencephalography systems with low channel counts.  
+*Sensors, 23*(14), 6537.
+
+Holmes, N., Rea, M., Chalmers, J., Leggett, J., Edwards, L. J., Nell, P., Pink, S., Patel, P., Wood, J., Murby, N., et al. (2022).  
+A lightweight magnetically shielded room with active shielding.  
+*Scientific Reports, 12*, 13561.
+
+Jodko-Władzińska, A., Wildner, K., Pałko, T., & Władziński, M. (2020).  
+Compensation system for biomagnetic measurements with optically pumped magnetometers inside a magnetically shielded room.  
+*Sensors, 20*. https://doi.org/10.3390/s20164563
+
+Kim, J. A., & Davis, K. D. (2021).  
+Magnetoencephalography: Physics, techniques, and applications in the basic and clinical neurosciences.  
+*Journal of Neurophysiology, 125*, 938–956.
+
+Leahy, R., Mosher, J., Spencer, M., Huang, M., & Lewine, J. (1998).  
+A study of dipole localization accuracy for MEG and EEG using a human skull phantom.  
+*Electroencephalography and Clinical Neurophysiology, 107*, 159–173.
+
+Oyama, D., & Zaatiti, H. (2025).  
+Phantom-based approach for comparing conventional and optically pumped magnetometer magnetoencephalography systems.  
+*Sensors, 25*. https://doi.org/10.3390/s25072063
+
+Pedersen, M., Abbott, D. F., & Jackson, G. D. (2022).  
+Wearable OPM-MEG: A changing landscape for epilepsy.  
+*Epilepsia, 63*, 2745–2753. https://doi.org/10.1111/epi.17368
+
+Tanaka, K., Tsukahara, A., Miyanaga, H., Tsunematsu, S., Kato, T., Matsubara, Y., & Sakai, H. (2024).  
+Superconducting self-shielded and zero-boil-off magnetoencephalogram systems: A dry phantom evaluation.  
+*Sensors, 24*, 6044.
+
+Tierney, T. M., Holmes, N., Mellor, S., López, J. D., Roberts, G., Hill, R. M., Boto, E., Leggett, J., Shah, V., Brookes, M. J., et al. (2019).  
+Optically pumped magnetometers: From quantum origins to multi-channel magnetoencephalography.  
+*NeuroImage, 199*, 598–608.
+
+Tierney, T. M., Alexander, N., Mellor, S., Holmes, N., Seymour, R., O’Neill, G. C., Maguire, E. A., & Barnes, G. R. (2021).  
+Modelling optically pumped magnetometer interference in MEG as a spatially homogeneous magnetic field.  
+*NeuroImage, 244*, 118484.
