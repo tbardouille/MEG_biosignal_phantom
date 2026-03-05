@@ -110,7 +110,7 @@ Figure 3 shows a post-processing topographic response for ECD 2 dataset 1.
 
 <img src="CTF_ECD2_D1_topo.png" width="600">
 <figcaption>
-Figure 3: Post-processing evoked response for ECD 1. This topography displays the average evoked response across 100 trials at t = 0 ms. The colourbar ranges from -6e-14 to 8e14.
+<b>Figure 3:</b> Post-processing evoked response for ECD 1. This topography displays the average evoked response across 100 trials at t = 0 ms. The colourbar ranges from -6e-14 to 8e14.
 </figcaption>
 
 </figure>
@@ -122,7 +122,7 @@ Here, we can see a strong evoked response of ~ 1000 fT, with a slight increase f
 <img src="HPI_CTF_D1_topo.png" width="600">
 
 <figcaption>
-Figure 4: Post-processing evoked topography for HPI 1, dataset 1. Each evoked response is averaged over 100 trials. The colourbar ranges from -2e-13 to 18e13.
+<b>Figure 4:</b> Post-processing evoked topography for HPI 1, dataset 1. Each evoked response is averaged over 100 trials. The colourbar ranges from -2e-13 to 18e13.
 </figcaption>
 
 </figure>
@@ -134,7 +134,7 @@ Using the evoked responses, localization accuracies for both the HPI and ECD coi
 
 <figure>
 <figcaption>
-Table 1: OPM vs CTF Localization statistics. Here, source represents the type of dipole, while index clarifies which. LE represents localization accuracy, and is reported for the phantom's X, Y, and Z directions per system. All LE values are in mm. 
+<b>Table 1:</b> OPM vs CTF Localization statistics. Here, source represents the type of dipole, while index clarifies which. LE represents localization accuracy, and is reported for the phantom's X, Y, and Z directions per system. All LE values are in mm. 
 </figcaption>
 <table>
 <thead>
@@ -171,7 +171,7 @@ From this table, we see that the localization accuracy of HPI coils was lower fo
 <figure>
 
 <figcaption>
-Table 2: Bias comparison for all HPI and ECD coils between OPM and CTF localization results.
+<b>Table 2:</b> Bias comparison for all HPI and ECD coils between OPM and CTF localization results.
 </figcaption>
 
 <table>
@@ -208,7 +208,7 @@ Table 3 compares the goodness of fit, HPI magnetic moments, and ECD amplitude fo
 <figure>
 
 <figcaption>
-Table 3: OPM vs CTF Goodness of Fit (GOF), amplitude, and moment. Here, source and index again represent the type of and specific dipole. Goodness of fit is reported as a percent, while ampltiudes and moments are reported in A·m and A·m² respectively.
+<b>Table 3:</b> OPM vs CTF Goodness of Fit (GOF), amplitude, and moment. Here, source and index again represent the type of and specific dipole. Goodness of fit is reported as a percent, while ampltiudes and moments are reported in A·m and A·m² respectively.
 
 </figcaption>
 
@@ -247,7 +247,7 @@ To better analyze the bias between trials, we can evaluate the HPI localizations
 <img src="Shifted_HPI_data.png" width="600">
 
 <figcaption>
-Figure 5: Shifted HPI localizations for CTF (top) and OPM (bottom) datasets. The X represents the localizations where we expect the HPI coils to be. Blue, orange, green, and red correspond to measured positions across all datasets.
+<b>Figure 5:</b> Shifted HPI localizations for CTF (top) and OPM (bottom) datasets. The X represents the localizations where we expect the HPI coils to be. Blue, orange, green, and red correspond to measured positions across all datasets.
 </figcaption>
 
 </figure>
