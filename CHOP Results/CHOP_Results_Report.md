@@ -24,39 +24,75 @@ Advances in quantum magnetometry are increasing the global adoption of magnetoen
 #### Theory 
 The phantom contains both equivalent current dipole (ECD) and head position indicator (HPI) coils. To model the ECDs, we express the primary current density, $J_p(r)$ as:
 
-(1)  J_p(r) = Q δ(r − r_Q)
+$$
+J_p(r) = Q\delta(r-r_Q)
+$$
+
+(1)
 
 where $Q$ is the current dipole moment, and $r_Q$ is the position at $Q$. From this, we can express the forward solution (as seen by the sensors) as:
 
-(2)  **B(r)** = (μ₀ / 4π) [ **Q** × (r − r_Q) / |r − r_Q|³ ]
+$$
+\mathbf{B}(\mathbf{r}) = \frac{\mu_0}{4\pi} \frac{\mathbf{Q} \times (\mathbf{r} - \mathbf{r}_Q)}{|\mathbf{r} - \mathbf{r}_Q|^3}.
+$$
+
+(2)
 
 Similarly, we can express a magnetic dipole induced by the HPI coils as the theoretical limit of closed loop with current density:
 
-(3)  **J(r)** = limₐ→0 [ I sin(θ′) δ(cos(θ′)) δ(r′ − a) / a ] **êφ**
+$$
+\mathbf{J}(\mathbf{r}) = \lim_{a \to 0} \left( I \sin{\theta'} \, \delta(\cos{\theta'}) \, \frac{\delta(r' - a)}{a} \right) \hat{\mathbf{e}}_\varphi
+$$
+
+(3)
 
 The induced magnetic field from this configuration, via Biot-Savart law, is:
 
-(4)  **B(r)** = (μ₀ / 4π) [ 3r (r · m) / r⁵ − m / r³ ]
+$$
+\mathbf{B}(\mathbf{r}) = \frac{\mu_0}{4\pi} \left[ \frac{3\mathbf{r} \, (\mathbf{r} \cdot \mathbf{m})}{r^5} - \frac{\mathbf{m}}{r^3} \right]
+$$
+
+(4)
 
 where $m$ is the magnetic dipole moment. In order to evaluate position and orientation of the ECDs, we optimize $Q$ and $r_Q$ to minimize least-squared error between the measured and predicted fields (Eq. 2). Likewise, the HPI coil position and orientation are given by an optimization of $m$ and $r_Q$ using Eq. 4. The solutions to this optimization are given in our MEG patient helmet's coordinate frame. We use a transformation matrix to map these coordinates directly to the phantom's frame. Localization error (LE) is calculated by finding the difference between measured and expected positions:
 
-(5)  LEᵢ = rᵢ(measured) − rᵢ(expected)
+$$
+\mathrm{LE}_i = r_i^{\text{measured}} - r_i^{\text{expected}}
+$$
+
+(5)
 
 such that the mean localization error is given by:
 
-(6)  **LĒ** = (1 / N) Σᵢ LEᵢ
+$$
+\bar{\mathrm{LE}} = \frac{1}{N} \sum_{i} \mathrm{LE}_i .
+$$
+
+(6)
 
 We also evaluate the directional bias associated with measurements to compliment localization accuracy. To achieve this, we first measure the directional displacement $d$ for a given direction and measurement $j,i$. This is formulated as:
 
-(7)  dᵢⱼ = Δrᵢ · eⱼ
+$$
+d_{ij} = \Delta \mathbf{r}_i \cdot \mathbf{e}_j
+$$
+
+(7)
 
 such that the mean becomes:
 
-(8)  dⱼ = (1 / N) Σᵢ dᵢⱼ
+$$
+d_j = \frac{1}{N} \sum_i d_{ij}
+$$
+
+(8)
 
 and then our bias is calculated via:
 
-(9)  bias = dⱼ / δdⱼ
+$$
+\text{bias} = \frac{d_j}{\delta d_j}
+$$
+
+(9)
 where $\delta d_j$ is the standard deviation of the directional displacement. These two quantities inform our measurement accuracy and validate our phantom.
 #### Setup and acquisition:
  To evaluate the phantom, the device was and circuitry were manufactured (see Build Instructions.md and Circuit Layout.png) and transported via plane from Halifax to Philidelphia. Our phantom contains four head position indicator (HPI) coils and four equivalent current dipole (ECD) coils.
@@ -303,3 +339,4 @@ Optically pumped magnetometers: From quantum origins to multi-channel magnetoenc
 Tierney, T. M., Alexander, N., Mellor, S., Holmes, N., Seymour, R., O’Neill, G. C., Maguire, E. A., & Barnes, G. R. (2021).  
 Modelling optically pumped magnetometer interference in MEG as a spatially homogeneous magnetic field.  
 *NeuroImage, 244*, 118484.
+
