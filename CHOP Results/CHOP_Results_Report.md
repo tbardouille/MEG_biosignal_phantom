@@ -1,7 +1,7 @@
-## OPM and CTF Phantom Validation at CHOP
+# OPM and CTF Phantom Validation at CHOP
 
-### Carson D. Leslie, Clara Knox, Timothy Bardouille
-### Background:
+## Carson D. Leslie, Clara Knox, Timothy Bardouille
+## Background:
 Advances in quantum magnetometry are increasing the global adoption of magnetoencephalography (MEG). Optically Pumped Magnetometers (OPMs) provide a cryogen-free alternative to traditional SQUID-based systems, enabling wearable and movement-tolerant MEG configurations (Tierney et al., 2019; Pedersen et al., 2022). Because OPMs operate in the nanotesla regime, magnetic shielding is essential. Common approaches include magnetically shielded rooms (MSRs) and portable cylindrical mu-metal shields, such as the dual-layer Mu-80 cylindrical system used in the Dalhousie Biosignal Lab (Holmes et al.,15
 2022; Jodko-Władzińska et al., 2020; Bardouille et al., 2024). Validation of these systems relies on phantom-based localization testing, where known current dipoles are reconstructed via inverse modeling. Prior studies report localization errors (LE) in the 1–5 mm range across OPM and SQUID systems, though a universally adopted phantom standard has yet to emerge. Examples of these studies are as follows:
 
@@ -19,9 +19,9 @@ Advances in quantum magnetometry are increasing the global adoption of magnetoen
 
  This work aims to design and validate a cost-effective dry phantom capable of achieving <3 mm localization accuracy across both cylindrical OPM and SQUID-MEG systems, including evaluation within the Children's Hosptital of Philidelphia (CHOP) OPM nad CTF-MEG systems. 
 
- ### Methods:
+ ## Methods:
 
-#### Theory 
+### Theory 
 The phantom contains both equivalent current dipole (ECD) and head position indicator (HPI) coils. To model the ECDs, we express the primary current density, $J_p(r)$ as:
 
 $$
@@ -32,9 +32,9 @@ $$
 
 where $Q$ is the current dipole moment, and $r_Q$ is the position at $Q$. From this, we can express the forward solution (as seen by the sensors) as:
 
-$$
+$
 \mathbf{B}(\mathbf{r}) = \frac{\mu_0}{4\pi} \frac{\mathbf{Q} \times (\mathbf{r} - \mathbf{r}_Q)}{|\mathbf{r} - \mathbf{r}_Q|^3}.
-$$
+$
 
 (2)
 
@@ -93,19 +93,20 @@ $$
 $$
 
 (9)
+
 where $\delta d_j$ is the standard deviation of the directional displacement. These two quantities inform our measurement accuracy and validate our phantom.
-#### Setup and acquisition:
+### Setup and acquisition:
  To evaluate the phantom, the device was and circuitry were manufactured (see Build Instructions.md and Circuit Layout.png) and transported via plane from Halifax to Philidelphia. Our phantom contains four head position indicator (HPI) coils and four equivalent current dipole (ECD) coils.
  At CHOP, we conducted a fixed current dipole magnitude experiment, first using a CTF SQUID MEG system and then with an OPM system in the same magnetic shielded room. The fixed magnitude was set to 17 nAm. For the CTF system, we omitted the 1000 nAm current dipole so there are 12 OPM and 11 CTF variable dipole recordings. The phantom was roughly centered within the helmet, however the phantom was not mounted to the sensor array for experiments at CHOP. Phantom position was known only via HPI localization. During the twelve repetitions of the fixed dipole magnitude experiment, the phantom was intentionally displaced slightly before each dataset was collected. 
 Both MEG systems at CHOP employed full head sensor arrays with single-axis sensors. The CTF MEG system contained 276 sensors and recorded at 1200 Hz, while the OPM system contained 114 sensors and recorded at 5000 Hz. A scan consisted of applying 100 repitions of an x hz sin wave to our eight dipoles in succesion, starting with our HPI coils. 
 
 
-#### OPM Data Processing 
+### OPM Data Processing 
 Once acquired, OPM data were processed using MNE-Python version 1.11.0. To start, we loaded raw FIF data and extracted stimulus onsets from the driver/stim channel using peak detection (SciPy v 1.15.1) with 100-sample minimum peak-peak distance and a 0.4 s event time.. Continous noise data were cleaned by applying a 60 Hz line-noise notch filter and a 3–20 Hz band-pass filter in MNE-Python, and inspecting time courses and power spectra using MNE-Python with Matplotlib to manually identify and remove noisy or faulty channels. Before localization reference array regression (RAR) and homogeneous field correction (HFC) (Tierney et al., 2021) were applied to better filter environmental signals. Finally data were epoched around each event with applied baseline correction between -0.200 s and -0.150 s, then averaged over our 100 trials.
-#### CTF Data Processing 
+### CTF Data Processing 
 Similar to the OPM data, CTF scans and were preprocessed using MNE-python, although our process differed for the HPI and ECD coils. HPI scans were filtered using 3rd order synthetic gradietn compensation, and bandpasses between 1 and 20 Hz. Epochs were baselined between -0.175 s and -0.125 s and averaged to create our evoked respones. For the ECD scans, we applied zeroth order gradient compensation and temporal signal space separation (tSSS) (Holmes et al., 2023) in 10 s increments. Data were then low passed using a fourth order butterworth filter at 30 Hz. For both ECD and HPI scans, peak detection remained consistent with OPM data. Datasets 6-11 included a double activation, meaning HPI dipoles 1 and 2 were active at the same time. To remedy this, half of the sensors (split by hemisphere) were ignored for all double activation trials when localizing HPI 1 or 2. 
 
-#### Localization
+### Localization
 HPI localization followed the same procedure for both OPM and CTF datasets. Once epochs were obtained, we estimate the position and orientation of a magnetic dipole from measured MEG magnetic field data. An initial estimate of the dipole position is first defined to guide the optimization. The geometry of the MEG sensors is then constructed from the measurement information so that the physical location and orientation of each coil is known. To properly weight the measurements during fitting, a noise covariance model is used to compute a whitening transformation, which normalizes the sensor data according to the expected noise level in each channel. This "ad-hoc" whitener is computed via MNE-Covariance. 
 
 A set of candidate dipole positions is generated within the measurement region to provide reasonable starting points for the fitting procedure. For each candidate position, the expected magnetic field pattern at the sensors is calculated using a magnetic dipole forward model (Eq. 4). The forward solution is then optimized to minimize residuals, and the best candidate location is selected. This process is performed via MNE's "fit_magnetic_dipole".
@@ -114,12 +115,12 @@ ECD localization proceeds in a similar fashion, using Equation 4 to generate a f
 
 Resulting HPI locations are then transformed into the phantom's coordinate frame using point-cloud alignment with the known coil positions. This same transformation matrix is then applied to ECD positions, giving us our localizations. 
 
-### Results:
+## Results:
 
-#### OPM Evoked Response
+### OPM Evoked Response
 
 
-#### CTF Evoked Response
+### CTF Evoked Response
 
 Figure 3 shows a post-processing topographic response for ECD 2 dataset 1. 
 
@@ -145,7 +146,7 @@ Here, we can see a strong evoked response of ~ 1000 fT, with a slight increase f
 </figure>
 
 
-#### CTF vs OPM Localization 
+### CTF vs OPM Localization 
 
 Using the evoked responses, localization accuracies for both the HPI and ECD coils were calculated by averaging over all trials and summarized in Table 1. This table includes a direct comparison for the OPM and CTF data. 
 
@@ -269,16 +270,16 @@ To better analyze the bias between trials, we can evaluate the HPI localizations
 
 </figure>
 
-### Discussion
+## Discussion
 
-#### Comparsion of Datasets
+### Comparsion of Datasets
 After analyzing the data, there is a clear bias in the -Y localization errors of the ECD coils. This is present across all ECD dipoles, being ~ 3mm for OPM data and ~ 6mm for CTF data. This was a surprising result, as we expected CTF data to serve as a ground truth for localization accuracy. While we are unsure of the root cause, we suspect fabrication errors due to the dismanting during travel from Halifax to Philidelphia. This may have offset the positions of the HPI or ECD coils, causing the bias. There was no obserable bias in the HPI coils in a set direction, although Figure 5 suggests an inward shift in the radial direction. Given Figures 1-4 suggest clean data, this likely points to mechanical errors within the phantom.
 
-#### Future Direction 
+### Future Direction 
 
 Immediate next steps include a redesign of the phantom. New builds are already in progress, and will need to be tested to ensure accuracy across multiple sites (Halifax, Stockhold, Netherlands). More capabilites (different frequency simultaneous waves, increased dipoles, stronger structure) may be implemented to continue advancing this device. The continued development of the phantom is vital to future MEG system validation. 
 
-### References
+## References
 
 Bardouille, T., Smith, V., Vajda, E., Leslie, C. D., & Holmes, N. (2024).  
 Noise reduction and localization accuracy in a mobile magnetoencephalography system.  
