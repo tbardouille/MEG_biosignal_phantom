@@ -130,11 +130,11 @@ Figure 2 shows a post-processing topographic response for OPM dataset 5. The top
 
 <img src="Figures/OPM_evokeds.png" width="600">
 <figcaption>
-<b>Figure 2:</b> Post-processing evoked response for OPM dataset 5. The top row shows the equivalent current dipole (ECD) responses and the bottom row shows the head position indicator (HPI) responses. ECD maps use a colour scale from −12000 to 12000 fT, while HPI maps use −1200 to 1200 fT. 
+<b>Figure 2:</b> Post-processing evoked response for OPM dataset 5. The top row shows the equivalent current dipole (ECD) responses and the bottom row shows the head position indicator (HPI) responses. ECD maps use a colour scale from −12000 to 12000 fT, while HPI maps use −1200 to 1200 fT. Dipoles are labeled 1-4 based on their position.  We do note the dipole response of ECD coils. 
 </figcaption>
 
 </figure>
-Here, an evoked response from -12000 fT to 12000 fT is present for ECDs, while a response between -1200 fT and 1200 fT is shown for HPI coils. We do note the dipole response of ECD coils. 
+
 
 ### CTF Evoked Response
 
