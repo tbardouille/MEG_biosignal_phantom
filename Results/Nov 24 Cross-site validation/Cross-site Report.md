@@ -21,7 +21,7 @@ Advances in quantum magnetometry are increasing the global adoption of magnetoen
 
 <figure align="center">
 
-<img src="figures/Phantom_photo.png" width="600">
+<img src="Figures/Phantom_photo.png" width="600">
 
 <figcaption>
 <b>Figure 1:</b> Display of the phantom iteration 1. X, Y, and Z are shown on the figure and correspond to the phantom's designated cartesian coordinate frame. Although not referenced in this report, the phantom's spherical coordinates are also shown.
@@ -34,12 +34,12 @@ Advances in quantum magnetometry are increasing the global adoption of magnetoen
 The phantom contains both equivalent current dipole (ECD) and head position indicator (HPI) coils. To model the ECDs, we express the primary current density, $J_p(r)$ as:
 
 <p align="center">
-  <img src="equations/Equation 1.png" alt="image" />
+  <img src="Equations/Equation 1.png" alt="image" />
 </p>
 where $Q$ is the current dipole moment, and $r_Q$ is the position at $Q$. From this, we can express the forward solution (as seen by the sensors) as:
 
 <p align="center">
-  <img src="equations/Equation 2.png" alt="image" />
+  <img src="Equations/Equation 2.png" alt="image" />
 </p>
 
 
@@ -49,7 +49,7 @@ where $Q$ is the current dipole moment, and $r_Q$ is the position at $Q$. From t
 Similarly, we can express a magnetic dipole induced by the HPI coils as the theoretical limit of closed loop with current density:
 
 <p align="center">
-  <img src="equations/Equation 3.png" alt="image" />
+  <img src="Equations/Equation 3.png" alt="image" />
 </p>
 
 
@@ -57,14 +57,14 @@ Similarly, we can express a magnetic dipole induced by the HPI coils as the theo
 The induced magnetic field from this configuration, via Biot-Savart law, is:
 
 <p align="center">
-  <img src="equations/Equation 4.png" alt="image" />
+  <img src="Equations/Equation 4.png" alt="image" />
 </p>
 
 
 where $m$ is the magnetic dipole moment. In order to evaluate position and orientation of the ECDs, we optimize $Q$ and $r_Q$ to minimize least-squared error between the measured and predicted fields (Eq. 2). Likewise, the HPI coil position and orientation are given by an optimization of $m$ and $r_Q$ using Eq. 4. The solutions to this optimization are given in our MEG patient helmet's coordinate frame. We use a transformation matrix to map these coordinates directly to the phantom's frame. Localization error (LE) is calculated by finding the difference between measured and expected positions:
 
 <p align="center">
-  <img src="equations/Equation 5.png" alt="image" />
+  <img src="Equations/Equation 5.png" alt="image" />
 </p>
 
 
@@ -72,28 +72,28 @@ where $m$ is the magnetic dipole moment. In order to evaluate position and orien
 such that the mean localization error is given by:
 
 <p align="center">
-  <img src="equations/Equation 6.png" alt="image" />
+  <img src="Equations/Equation 6.png" alt="image" />
 </p>
 
 
 We also evaluate the directional bias associated with measurements to compliment localization accuracy. To achieve this, we first measure the directional displacement $d$ for a given direction and measurement $j,i$. This is formulated as:
 
 <p align="center">
-  <img src="equations/Equation 7.png" alt="image" />
+  <img src="Equations/Equation 7.png" alt="image" />
 </p>
 
 
 such that the mean becomes:
 
 <p align="center">
-  <img src="equations/Equation 7.png" alt="image" />
+  <img src="Equations/Equation 7.png" alt="image" />
 </p>
 
 
 and then our bias is calculated via:
 
 <p align="center">
-  <img src="equations/Equation 9.png" alt="image" />
+  <img src="Equations/Equation 9.png" alt="image" />
 </p>
 
 
@@ -132,7 +132,7 @@ Figure 4 shows a post-processing topographic response for ECD 2 dataset 1.
 
 <figure align="center">
 
-<img src="figures/CTF_ECD2_D1_topo.png" width="600">
+<img src="Figures/CTF_ECD2_D1_topo.png" width="600">
 <figcaption>
 <b>Figure 4:</b> Post-processing evoked response for ECD 1. This topography displays the average evoked response across 100 trials at t = 0 ms. The colourbar ranges from -6e-14 to 8e14.
 </figcaption>
@@ -143,7 +143,7 @@ Here, we can see a strong evoked response of ~ 1000 fT, with a slight increase f
 
 <figure align="center">
 
-<img src="figures/HPI_CTF_D1_topo.png" width="600">
+<img src="Figures/HPI_CTF_D1_topo.png" width="600">
 
 <figcaption>
 <b>Figure 5:</b> Post-processing evoked topography for HPI 1, dataset 1. Each evoked response is averaged over 100 trials. The colourbar ranges from -2e-13 to 18e13.
@@ -272,7 +272,7 @@ To better analyze the bias between trials, we can evaluate the HPI localizations
 
 <figure align="center">
 
-<img src="figures/Shifted_HPI_data.png" width="600">
+<img src="Figures/Shifted_HPI_data.png" width="600">
 
 <figcaption>
 <b>Figure 6:</b> Shifted HPI localizations for CTF (top) and OPM (bottom) datasets. The X represents the localizations where we expect the HPI coils to be. Blue, orange, green, and red correspond to measured positions across all datasets.
