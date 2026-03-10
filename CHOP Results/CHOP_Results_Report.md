@@ -24,75 +24,70 @@ Advances in quantum magnetometry are increasing the global adoption of magnetoen
 ### Theory 
 The phantom contains both equivalent current dipole (ECD) and head position indicator (HPI) coils. To model the ECDs, we express the primary current density, $J_p(r)$ as:
 
-$$
-J_p(r) = Q\delta(r-r_Q)
-$$
-
-(1)
-
+<p align="center">
+  <img src="Equation 1.png" alt="image" />
+</p>
 where $Q$ is the current dipole moment, and $r_Q$ is the position at $Q$. From this, we can express the forward solution (as seen by the sensors) as:
 
-$$
-\mathbf{B}(\mathbf{r}) = \frac{\mu_0}{4\pi} \frac{\mathbf{Q} \times (\mathbf{r} - \mathbf{r}_Q)}{|\mathbf{r} - \mathbf{r}_Q|^3}.
-$$
+<p align="center">
+  <img src="Equation 2.png" alt="image" />
+</p>
 
-(2)
+
+
+
 
 Similarly, we can express a magnetic dipole induced by the HPI coils as the theoretical limit of closed loop with current density:
 
-$$
-\mathbf{J}(\mathbf{r}) = \lim_{a \to 0} \left( I \sin{\theta'} \, \delta(\cos{\theta'}) \, \frac{\delta(r' - a)}{a} \right) \hat{\mathbf{e}}_\varphi
-$$
+<p align="center">
+  <img src="Equation 3.png" alt="image" />
+</p>
 
-(3)
+
 
 The induced magnetic field from this configuration, via Biot-Savart law, is:
 
-$$
-\mathbf{B}(\mathbf{r}) = \frac{\mu_0}{4\pi} \left[ \frac{3\mathbf{r} \, (\mathbf{r} \cdot \mathbf{m})}{r^5} - \frac{\mathbf{m}}{r^3} \right]
-$$
+<p align="center">
+  <img src="Equation 4.png" alt="image" />
+</p>
 
-(4)
 
 where $m$ is the magnetic dipole moment. In order to evaluate position and orientation of the ECDs, we optimize $Q$ and $r_Q$ to minimize least-squared error between the measured and predicted fields (Eq. 2). Likewise, the HPI coil position and orientation are given by an optimization of $m$ and $r_Q$ using Eq. 4. The solutions to this optimization are given in our MEG patient helmet's coordinate frame. We use a transformation matrix to map these coordinates directly to the phantom's frame. Localization error (LE) is calculated by finding the difference between measured and expected positions:
 
-$$
-\mathrm{LE}_i = r_i^{\text{measured}} - r_i^{\text{expected}}
-$$
+<p align="center">
+  <img src="Equation 5.png" alt="image" />
+</p>
 
-(5)
+
 
 such that the mean localization error is given by:
 
-$$
-\bar{\mathrm{LE}} = \frac{1}{N} \sum_{i} \mathrm{LE}_i .
-$$
+<p align="center">
+  <img src="Equation 6.png" alt="image" />
+</p>
 
-(6)
 
 We also evaluate the directional bias associated with measurements to compliment localization accuracy. To achieve this, we first measure the directional displacement $d$ for a given direction and measurement $j,i$. This is formulated as:
 
-$$
-d_{ij} = \Delta \mathbf{r}_i \cdot \mathbf{e}_j
-$$
+<p align="center">
+  <img src="Equation 7.png" alt="image" />
+</p>
 
-(7)
 
 such that the mean becomes:
 
-$$
-d_j = \frac{1}{N} \sum_i d_{ij}
-$$
+<p align="center">
+  <img src="Equation 7.png" alt="image" />
+</p>
 
-(8)
 
 and then our bias is calculated via:
 
-$$
-\text{bias} = \frac{d_j}{\delta d_j}
-$$
+<p align="center">
+  <img src="Equation 9.png" alt="image" />
+</p>
 
-(9)
+
 
 where $\delta d_j$ is the standard deviation of the directional displacement. These two quantities inform our measurement accuracy and validate our phantom.
 ### Setup and acquisition:
