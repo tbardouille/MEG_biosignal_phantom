@@ -124,29 +124,39 @@ Resulting HPI locations are then transformed into the phantom's coordinate frame
 ## Results:
 
 ### OPM Evoked Response
+Figure 2 shows a post-processing topographic response for OPM dataset 5. The top row shows ECD topographies, while the bottom are the HPIs.
 
+<figure align="center">
+
+<img src="Figures/OPM_evokeds.png" width="600">
+<figcaption>
+<b>Figure 2:</b> Post-processing evoked response for OPM dataset 5. The top row shows the equivalent current dipole (ECD) responses and the bottom row shows the head position indicator (HPI) responses. ECD maps use a colour scale from −12000 to 12000 fT, while HPI maps use −1200 to 1200 fT. 
+</figcaption>
+
+</figure>
+Here, an evoked response from -12000 fT to 12000 fT is present for ECDs, while a response between -1200 fT and 1200 fT is shown for HPI coils. We do note the dipole response of ECD coils. 
 
 ### CTF Evoked Response
 
-Figure 4 shows a post-processing topographic response for ECD 2 dataset 1. 
+Figure 3 shows a post-processing topographic response for ECD 2 dataset 1. 
 
 <figure align="center">
 
 <img src="Figures/CTF_ECD2_D1_topo.png" width="600">
 <figcaption>
-<b>Figure 4:</b> Post-processing evoked response for ECD 1. This topography displays the average evoked response across 100 trials at t = 0 ms. The colourbar ranges from -6e-14 to 8e14.
+<b>Figure 3:</b> Post-processing evoked response for ECD 1. This topography displays the average evoked response across 100 trials at t = 0 ms. The colourbar ranges from -6e-14 to 8e14.
 </figcaption>
 
 </figure>
 
-Here, we can see a strong evoked response of ~ 1000 fT, with a slight increase for dataset 9 over dataset 1. Similarily, Figure 5 displays the post-processed evoked topography for HPI 1, dataset 1. 
+Here, we can see a strong evoked dipole response. Similarily, Figure 4 displays the post-processed evoked topography for HPI 1, dataset 1. 
 
 <figure align="center">
 
 <img src="Figures/HPI_CTF_D1_topo.png" width="600">
 
 <figcaption>
-<b>Figure 5:</b> Post-processing evoked topography for HPI 1, dataset 1. Each evoked response is averaged over 100 trials. The colourbar ranges from -2e-13 to 18e13.
+<b>Figure 4:</b> Post-processing evoked topography for HPI 1, dataset 1. Each evoked response is averaged over 100 trials. The colourbar ranges from -2e-13 to 18e13.
 </figcaption>
 
 </figure>
@@ -267,7 +277,7 @@ Table 3 compares the goodness of fit, HPI magnetic moments, and ECD amplitude fo
 </table>
 
 </figure>
-To better analyze the bias between trials, we can evaluate the HPI localizations across all datasets. To better observe localization errors, we translated each data point inward such that the expected radius is reduced by 4.75 cm. This allows us to clearly see differences between each dataset, and is shown in Figure 6.
+To better analyze the bias between trials, we can evaluate the HPI localizations across all datasets. To better observe localization errors, we translated each data point inward such that the expected radius is reduced by 4.75 cm. This allows us to clearly see differences between each dataset, and is shown in Figure 5.
 
 
 <figure align="center">
@@ -275,7 +285,7 @@ To better analyze the bias between trials, we can evaluate the HPI localizations
 <img src="Figures/Shifted_HPI_data.png" width="600">
 
 <figcaption>
-<b>Figure 6:</b> Shifted HPI localizations for CTF (top) and OPM (bottom) datasets. The X represents the localizations where we expect the HPI coils to be. Blue, orange, green, and red correspond to measured positions across all datasets.
+<b>Figure 5:</b> Shifted HPI localizations for CTF (top) and OPM (bottom) datasets. The X represents the localizations where we expect the HPI coils to be. Blue, orange, green, and red correspond to measured positions across all datasets.
 </figcaption>
 
 </figure>
