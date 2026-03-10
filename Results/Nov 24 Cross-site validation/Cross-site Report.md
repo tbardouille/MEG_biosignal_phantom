@@ -17,20 +17,29 @@ Advances in quantum magnetometry are increasing the global adoption of magnetoen
 
 
 
- This work aims to design and validate a cost-effective dry phantom capable of achieving <3 mm localization accuracy across both cylindrical OPM and SQUID-MEG systems, including evaluation within the Children's Hosptital of Philidelphia (CHOP) OPM nad CTF-MEG systems. 
+ This work aims to design and validate a cost-effective dry phantom capable of achieving <3 mm localization accuracy across both cylindrical OPM and SQUID-MEG systems, including evaluation within the Children's Hosptital of Philidelphia (CHOP) OPM nad CTF-MEG systems. This work uses the 1st version of the phantom, as pictured in Figure 1.
 
+<figure align="center">
+
+<img src="figures/Phantom_photo.png" width="600">
+
+<figcaption>
+<b>Figure 1:</b> Display of the phantom iteration 1. X, Y, and Z are shown on the figure and correspond to the phantom's designated cartesian coordinate frame. Although not referenced in this report, the phantom's spherical coordinates are also shown.
+</figcaption>
+
+</figure>
  ## Methods:
 
 ### Theory 
 The phantom contains both equivalent current dipole (ECD) and head position indicator (HPI) coils. To model the ECDs, we express the primary current density, $J_p(r)$ as:
 
 <p align="center">
-  <img src="Equation 1.png" alt="image" />
+  <img src="equations/Equation 1.png" alt="image" />
 </p>
 where $Q$ is the current dipole moment, and $r_Q$ is the position at $Q$. From this, we can express the forward solution (as seen by the sensors) as:
 
 <p align="center">
-  <img src="Equation 2.png" alt="image" />
+  <img src="equations/Equation 2.png" alt="image" />
 </p>
 
 
@@ -40,7 +49,7 @@ where $Q$ is the current dipole moment, and $r_Q$ is the position at $Q$. From t
 Similarly, we can express a magnetic dipole induced by the HPI coils as the theoretical limit of closed loop with current density:
 
 <p align="center">
-  <img src="Equation 3.png" alt="image" />
+  <img src="equations/Equation 3.png" alt="image" />
 </p>
 
 
@@ -48,14 +57,14 @@ Similarly, we can express a magnetic dipole induced by the HPI coils as the theo
 The induced magnetic field from this configuration, via Biot-Savart law, is:
 
 <p align="center">
-  <img src="Equation 4.png" alt="image" />
+  <img src="equations/Equation 4.png" alt="image" />
 </p>
 
 
 where $m$ is the magnetic dipole moment. In order to evaluate position and orientation of the ECDs, we optimize $Q$ and $r_Q$ to minimize least-squared error between the measured and predicted fields (Eq. 2). Likewise, the HPI coil position and orientation are given by an optimization of $m$ and $r_Q$ using Eq. 4. The solutions to this optimization are given in our MEG patient helmet's coordinate frame. We use a transformation matrix to map these coordinates directly to the phantom's frame. Localization error (LE) is calculated by finding the difference between measured and expected positions:
 
 <p align="center">
-  <img src="Equation 5.png" alt="image" />
+  <img src="equations/Equation 5.png" alt="image" />
 </p>
 
 
@@ -63,29 +72,31 @@ where $m$ is the magnetic dipole moment. In order to evaluate position and orien
 such that the mean localization error is given by:
 
 <p align="center">
-  <img src="Equation 6.png" alt="image" />
+  <img src="equations/Equation 6.png" alt="image" />
 </p>
 
 
 We also evaluate the directional bias associated with measurements to compliment localization accuracy. To achieve this, we first measure the directional displacement $d$ for a given direction and measurement $j,i$. This is formulated as:
 
 <p align="center">
-  <img src="Equation 7.png" alt="image" />
+  <img src="equations/Equation 7.png" alt="image" />
 </p>
 
 
 such that the mean becomes:
 
 <p align="center">
-  <img src="Equation 7.png" alt="image" />
+  <img src="equations/Equation 7.png" alt="image" />
 </p>
 
 
 and then our bias is calculated via:
 
 <p align="center">
-  <img src="Equation 9.png" alt="image" />
+  <img src="equations/Equation 9.png" alt="image" />
 </p>
+
+
 
 
 
@@ -117,25 +128,25 @@ Resulting HPI locations are then transformed into the phantom's coordinate frame
 
 ### CTF Evoked Response
 
-Figure 3 shows a post-processing topographic response for ECD 2 dataset 1. 
+Figure 4 shows a post-processing topographic response for ECD 2 dataset 1. 
 
 <figure align="center">
 
-<img src="CTF_ECD2_D1_topo.png" width="600">
+<img src="figures/CTF_ECD2_D1_topo.png" width="600">
 <figcaption>
-<b>Figure 3:</b> Post-processing evoked response for ECD 1. This topography displays the average evoked response across 100 trials at t = 0 ms. The colourbar ranges from -6e-14 to 8e14.
+<b>Figure 4:</b> Post-processing evoked response for ECD 1. This topography displays the average evoked response across 100 trials at t = 0 ms. The colourbar ranges from -6e-14 to 8e14.
 </figcaption>
 
 </figure>
 
-Here, we can see a strong evoked response of ~ 1000 fT, with a slight increase for dataset 9 over dataset 1. Similarily, Figure 4 displays the post-processed evoked topography for HPI 1, dataset 1. 
+Here, we can see a strong evoked response of ~ 1000 fT, with a slight increase for dataset 9 over dataset 1. Similarily, Figure 5 displays the post-processed evoked topography for HPI 1, dataset 1. 
 
 <figure align="center">
 
-<img src="HPI_CTF_D1_topo.png" width="600">
+<img src="figures/HPI_CTF_D1_topo.png" width="600">
 
 <figcaption>
-<b>Figure 4:</b> Post-processing evoked topography for HPI 1, dataset 1. Each evoked response is averaged over 100 trials. The colourbar ranges from -2e-13 to 18e13.
+<b>Figure 5:</b> Post-processing evoked topography for HPI 1, dataset 1. Each evoked response is averaged over 100 trials. The colourbar ranges from -2e-13 to 18e13.
 </figcaption>
 
 </figure>
@@ -143,77 +154,82 @@ Here, we can see a strong evoked response of ~ 1000 fT, with a slight increase f
 
 ### CTF vs OPM Localization 
 
-Using the evoked responses, localization accuracies for both the HPI and ECD coils were calculated by averaging over all trials and summarized in Table 1. This table includes a direct comparison for the OPM and CTF data. 
-
+Using the evoked responses, localization accuracies for both the HPI and ECD coils were calculated by averaging over all trials and summarized in Table 1. This table includes a direct comparison for the OPM and CTF data. Table 2 shows the same data, split into directional components $d$.
 <figure>
 <figcaption>
-<b>Table 1:</b> OPM vs CTF Localization statistics. Here, source represents the type of dipole, while index clarifies which. LE represents localization accuracy, and is reported for the phantom's X, Y, and Z directions per system. All LE values are in mm. 
+<b>Table 1:</b> OPM vs CTF Localization statistics. Here, source represents the type of dipole and index combined. LE represents localization accuracy.
 </figcaption>
 <table>
 <thead>
 <tr>
 <th>Source</th>
-<th>Index</th>
-<th>LE_OPM</th>
-<th>LE_CTF</th>
-<th>LE_x_OPM</th>
-<th>LE_x_CTF</th>
-<th>LE_y_OPM</th>
-<th>LE_y_CTF</th>
-<th>LE_z_OPM</th>
-<th>LE_z_CTF</th>
+<th>LE (OPM)</th>
+<th>LE (CTF)</th>
 </tr>
 </thead>
 <tbody>
-<tr><td>HPI</td><td>1.00</td><td>1.66</td><td>1.02</td><td>-0.39</td><td>-0.28</td><td>0.37</td><td>0.81</td><td>0.04</td><td>0.03</td></tr>
-<tr><td>HPI</td><td>2.00</td><td>1.66</td><td>0.84</td><td>-0.16</td><td>0.04</td><td>0.01</td><td>0.56</td><td>-0.04</td><td>-0.03</td></tr>
-<tr><td>HPI</td><td>3.00</td><td>1.87</td><td>1.12</td><td>-0.86</td><td>0.73</td><td>-0.56</td><td>-0.80</td><td>0.04</td><td>0.03</td></tr>
-<tr><td>HPI</td><td>4.00</td><td>2.09</td><td>0.77</td><td>1.41</td><td>-0.48</td><td>0.18</td><td>-0.56</td><td>-0.04</td><td>-0.03</td></tr>
-<tr><td>ECD</td><td>1.00</td><td>4.08</td><td>7.25</td><td>0.56</td><td>5.21</td><td>-3.08</td><td>-4.24</td><td>-0.34</td><td>-2.00</td></tr>
-<tr><td>ECD</td><td>2.00</td><td>4.07</td><td>8.40</td><td>0.34</td><td>4.57</td><td>-2.58</td><td>-4.10</td><td>-1.05</td><td>0.69</td></tr>
-<tr><td>ECD</td><td>3.00</td><td>5.10</td><td>9.52</td><td>2.80</td><td>-2.06</td><td>-3.04</td><td>-6.05</td><td>-0.36</td><td>-0.26</td></tr>
-<tr><td>ECD</td><td>4.00</td><td>4.27</td><td>7.04</td><td>2.27</td><td>-4.44</td><td>-1.46</td><td>-4.84</td><td>-2.60</td><td>0.49</td></tr>
+<tr><td>ALL HPIs</td><td>1.82 &plusmn; 0.42</td><td>0.94 &plusmn; 0.12</td></tr>
+<tr><td>ALL ECDs</td><td>4.38 &plusmn; 0.84</td><td>8.05 &plusmn; 1.30</td></tr>
+
+<tr><td>HPI 1</td><td>1.66 &plusmn;0.70 </td><td>1.02 &plusmn;0.19 </td></tr>
+<tr><td>HPI 2</td><td>1.66 &plusmn;0.74 </td><td>0.84 &plusmn;0.24 </td></tr>
+<tr><td>HPI 3</td><td>1.87 &plusmn;1.03 </td><td>1.12 &plusmn;0.34 </td></tr>
+<tr><td>HPI 4</td><td>2.09 &plusmn; 0.84</td><td>0.77 &plusmn;0.20 </td></tr>
+<tr><td>ECD 1</td><td>4.08 &plusmn;1.35 </td><td>7.25 &plusmn;1.43 </td></tr>
+<tr><td>ECD 2</td><td>4.07 &plusmn;1.48 </td><td>8.40 &plusmn;3.57 </td></tr>
+<tr><td>ECD 3</td><td>5.10 &plusmn;2.17 </td><td>9.52 &plusmn;3.06 </td></tr>
+<tr><td>ECD 4</td><td>4.27 &plusmn;1.59 </td><td>7.04 &plusmn;1.67 </td></tr>
+
+<tr>
+<td colspan="3" align="center"><b>All LE values are in mm</b></td>
+</tr>
 </tbody>
 </table>
+</figure>
 
+
+<figure>
+<figcaption>
+<b>Table 2:</b> Directional localization error components for OPM and CTF systems. Directional components are reported using <i>d</i><sub>j</sub> notation.
+</figcaption>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>d<sub>x</sub> (OPM)</th>
+<th>d<sub>x</sub> (CTF)</th>
+<th>d<sub>y</sub> (OPM)</th>
+<th>d<sub>y</sub> (CTF)</th>
+<th>d<sub>z</sub> (OPM)</th>
+<th>d<sub>z</sub> (CTF)</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>ALL HPIs</td><td>0.00 &plusmn; 0.26</td><td>0.00 &plusmn; 0.21</td><td>0.00 &plusmn; 0.40</td><td>0.00 &plusmn; 0.14</td><td>0.00 &plusmn; 0.82</td><td>0.00 &plusmn; 0.11</td></tr>
+
+<tr><td>ALL ECDs</td><td>1.49 &plusmn; 0.86</td><td>0.82 &plusmn; 1.48</td><td>-2.54 &plusmn; 0.96</td><td>-4.81 &plusmn; 0.71</td><td>-1.09 &plusmn; 1.04</td><td>-0.27 &plusmn; 2.30</td></tr>
+
+<tr><td>HPI 1</td><td>-0.39 &plusmn;0.34 </td><td>-0.28 &plusmn;0.55 </td><td>0.37 &plusmn;0.74 </td><td>0.81 &plusmn;0.18 </td><td>0.04 &plusmn;1.63 </td><td>0.03 &plusmn;0.21 </td></tr>
+<tr><td>HPI 2</td><td>-0.16 &plusmn;0.15 </td><td>0.04 &plusmn;0.60 </td><td>0.01 &plusmn;1.00 </td><td>0.56 &plusmn;0.30 </td><td>-0.04 &plusmn; 1.63</td><td>-0.03 &plusmn;0.21 </td></tr>
+<tr><td>HPI 3</td><td>-0.86 &plusmn;0.77 </td><td>0.73 &plusmn;0.12 </td><td>-0.56 &plusmn;0.77 </td><td>-0.80 &plusmn;0.38 </td><td>0.04 &plusmn;1.63 </td><td>0.03 &plusmn;0.21 </td></tr>
+<tr><td>HPI 4</td><td>1.41 &plusmn; 0.58</td><td>-0.48 &plusmn;0.15 </td><td>0.18 &plusmn;0.61 </td><td>-0.56 &plusmn;0.18 </td><td>-0.04 &plusmn;1.63 </td><td>-0.03 &plusmn;0.21 </td></tr>
+<tr><td>ECD 1</td><td>0.56 &plusmn;1.08 </td><td>5.21 &plusmn;1.23 </td><td>-3.08 &plusmn;1.03 </td><td>-4.24 &plusmn;1.80 </td><td>-0.34 &plusmn;2.73 </td><td>-2.00 &plusmn;1.05 </td></tr>
+<tr><td>ECD 2</td><td>0.34 &plusmn;2.02 </td><td>4.57 &plusmn;2.21 </td><td>-2.58 &plusmn;2.48 </td><td>-4.10 &plusmn;1.31 </td><td>-1.05 &plusmn;1.40 </td><td>0.69 &plusmn;6.45 </td></tr>
+<tr><td>ECD 3</td><td>2.80 &plusmn;2.48 </td><td>-2.06 &plusmn;4.83 </td><td>-3.04 &plusmn;2.59 </td><td>-6.05 &plusmn;0.82 </td><td>-0.36 &plusmn;1.36 </td><td>-0.26 &plusmn;6.33 </td></tr>
+<tr><td>ECD 4</td><td>2.27 &plusmn;0.74 </td><td>-4.44 &plusmn;2.29 </td><td>-1.46 &plusmn;0.85 </td><td>-4.84 &plusmn;1.53 </td><td>-2.60 &plusmn;2.46 </td><td>0.49 &plusmn;1.45 </td></tr>
+
+<tr>
+<td colspan="7" align="center"><b>All LE values are in mm</b></td>
+</tr>
+</tbody>
+</table>
+</figure>
 
 
 </figure>
 
-From this table, we see that the localization accuracy of HPI coils was lower for the CTF system than the OPM system (1 vs 2 mm). There was no obvious directional bias for either system. For the ECDs, the OPM system localized to 4-5 mm, while the CTF system was between 7-9 mm. In both systems, there was an observed bias in the -Y direction, greater in the CTF system. This is more evident in Table 2, which compares the localization bias (Eq. 9) for the OPM and CTF systems. 
-<figure>
+From this table, we see that the localization accuracy of HPI coils was lower for the CTF system than the OPM system (1 vs 2 mm). There was no obvious directional bias for either system. For the ECDs, the OPM system localized to 4-5 mm, while the CTF system was between 7-9 mm. In both systems, there was an observed bias in the -Y direction, greater in the CTF system. This is more evident in Table 2, which compares the localization error across each dimension. 
 
-<figcaption>
-<b>Table 2:</b> Bias comparison for all HPI and ECD coils between OPM and CTF localization results.
-</figcaption>
-
-<table>
-<thead>
-<tr>
-<th>Source</th>
-<th>Index</th>
-<th>Bias_x OPM</th>
-<th>Bias_x CTF</th>
-<th>Bias_y OPM</th>
-<th>Bias_y CTF</th>
-<th>Bias_z OPM</th>
-<th>Bias_z CTF</th>
-</tr>
-</thead>
-
-<tbody>
-<tr><td>HPI</td><td>1.00</td><td>-1.15</td><td>-0.51</td><td>0.50</td><td>4.45</td><td>0.03</td><td>0.14</td></tr>
-<tr><td>HPI</td><td>2.00</td><td>-1.07</td><td>0.06</td><td>0.01</td><td>1.84</td><td>-0.03</td><td>-0.14</td></tr>
-<tr><td>HPI</td><td>3.00</td><td>-1.12</td><td>6.06</td><td>-0.73</td><td>-2.10</td><td>0.03</td><td>0.14</td></tr>
-<tr><td>HPI</td><td>4.00</td><td>2.43</td><td>-3.22</td><td>0.30</td><td>-3.13</td><td>-0.03</td><td>-0.14</td></tr>
-
-<tr><td>ECD</td><td>1.00</td><td>0.52</td><td>4.24</td><td>-2.99</td><td>-2.36</td><td>-0.13</td><td>-1.90</td></tr>
-<tr><td>ECD</td><td>2.00</td><td>0.17</td><td>2.06</td><td>-1.04</td><td>-3.13</td><td>-0.75</td><td>0.11</td></tr>
-<tr><td>ECD</td><td>3.00</td><td>1.13</td><td>-0.43</td><td>-1.17</td><td>-7.40</td><td>-0.27</td><td>-0.04</td></tr>
-<tr><td>ECD</td><td>4.00</td><td>3.07</td><td>-1.94</td><td>-1.72</td><td>-3.15</td><td>-1.06</td><td>0.34</td></tr>
-
-</tbody>
-</table>
 
 </figure>
 Table 3 compares the goodness of fit, HPI magnetic moments, and ECD amplitude for the CTF and OPM systems. 
@@ -221,7 +237,7 @@ Table 3 compares the goodness of fit, HPI magnetic moments, and ECD amplitude fo
 <figure>
 
 <figcaption>
-<b>Table 3:</b> OPM vs CTF Goodness of Fit (GOF), amplitude, and moment. Here, source and index again represent the type of and specific dipole. Goodness of fit is reported as a percent, while ampltiudes and moments are reported in A·m and A·m² respectively.
+<b>Table 3:</b> OPM vs CTF Goodness of Fit (GOF), amplitude, and moment. Here, source and index again represent the type of and specific dipole. Goodness of fit is reported as a percent, while ampltiudes and moments are reported in nA·m and nA·m² respectively.
 
 </figcaption>
 
@@ -239,28 +255,27 @@ Table 3 compares the goodness of fit, HPI magnetic moments, and ECD amplitude fo
 </tr>
 </thead>
 <tbody>
-<tr><td>HPI</td><td>1</td><td>99.67</td><td>99.66</td><td></td><td></td><td>3.907E-09</td><td>3.420E-09</td></tr>
-<tr><td>HPI</td><td>2</td><td>99.47</td><td>99.54</td><td></td><td></td><td>3.480E-09</td><td>3.330E-09</td></tr>
-<tr><td>HPI</td><td>3</td><td>99.97</td><td>99.86</td><td></td><td></td><td>2.940E-09</td><td>4.370E-09</td></tr>
-<tr><td>HPI</td><td>4</td><td>99.85</td><td>99.82</td><td></td><td></td><td>3.343E-09</td><td>4.430E-09</td></tr>
-<tr><td>ECD</td><td>1</td><td>92.29</td><td>92.44</td><td>3.430E-08</td><td>3.080E-08</td><td></td><td></td></tr>
-<tr><td>ECD</td><td>2</td><td>93.53</td><td>83.99</td><td>3.500E-08</td><td>3.750E-08</td><td></td><td></td></tr>
-<tr><td>ECD</td><td>3</td><td>94.23</td><td>75.14</td><td>4.060E-08</td><td>4.460E-08</td><td></td><td></td></tr>
-<tr><td>ECD</td><td>4</td><td>94.14</td><td>91.47</td><td>3.580E-08</td><td>3.080E-08</td><td></td><td></td></tr>
+<tr><td>HPI</td><td>1</td><td>99.67</td><td>99.66</td><td></td><td></td><td>3.907</td><td>3.420</td></tr>
+<tr><td>HPI</td><td>2</td><td>99.47</td><td>99.54</td><td></td><td></td><td>3.480</td><td>3.330</td></tr>
+<tr><td>HPI</td><td>3</td><td>99.97</td><td>99.86</td><td></td><td></td><td>2.940</td><td>4.370</td></tr>
+<tr><td>HPI</td><td>4</td><td>99.85</td><td>99.82</td><td></td><td></td><td>3.343</td><td>4.430</td></tr>
+<tr><td>ECD</td><td>1</td><td>92.29</td><td>92.44</td><td>34.30</td><td>30.80</td><td></td><td></td></tr>
+<tr><td>ECD</td><td>2</td><td>93.53</td><td>83.99</td><td>35.00</td><td>37.50</td><td></td><td></td></tr>
+<tr><td>ECD</td><td>3</td><td>94.23</td><td>75.14</td><td>40.60</td><td>44.60</td><td></td><td></td></tr>
+<tr><td>ECD</td><td>4</td><td>94.14</td><td>91.47</td><td>35.80</td><td>30.80</td><td></td><td></td></tr>
 </tbody>
 </table>
 
 </figure>
-
-To better analyze the bias between trials, we can evaluate the HPI localizations across all datasets. To better observe localization errors, we translated each data point inward such that the expected radius is reduced by 4.75 cm. This allows us to clearly see differences between each dataset, and is shown in Figure 5.
+To better analyze the bias between trials, we can evaluate the HPI localizations across all datasets. To better observe localization errors, we translated each data point inward such that the expected radius is reduced by 4.75 cm. This allows us to clearly see differences between each dataset, and is shown in Figure 6.
 
 
 <figure align="center">
 
-<img src="Shifted_HPI_data.png" width="600">
+<img src="figures/Shifted_HPI_data.png" width="600">
 
 <figcaption>
-<b>Figure 5:</b> Shifted HPI localizations for CTF (top) and OPM (bottom) datasets. The X represents the localizations where we expect the HPI coils to be. Blue, orange, green, and red correspond to measured positions across all datasets.
+<b>Figure 6:</b> Shifted HPI localizations for CTF (top) and OPM (bottom) datasets. The X represents the localizations where we expect the HPI coils to be. Blue, orange, green, and red correspond to measured positions across all datasets.
 </figcaption>
 
 </figure>
@@ -268,11 +283,11 @@ To better analyze the bias between trials, we can evaluate the HPI localizations
 ## Discussion
 
 ### Comparsion of Datasets
-After analyzing the data, there is a clear bias in the -Y localization errors of the ECD coils. This is present across all ECD dipoles, being ~ 3mm for OPM data and ~ 6mm for CTF data. This was a surprising result, as we expected CTF data to serve as a ground truth for localization accuracy. While we are unsure of the root cause, we suspect fabrication errors due to the dismanting during travel from Halifax to Philidelphia. This may have offset the positions of the HPI or ECD coils, causing the bias. There was no obserable bias in the HPI coils in a set direction, although Figure 5 suggests an inward shift in the radial direction. Given Figures 1-4 suggest clean data, this likely points to mechanical errors within the phantom.
+After analyzing the data, there is a clear bias in the -Y localization errors of the ECD coils. This is present across all ECD dipoles, being ~ 3mm for OPM data and ~ 6mm for CTF data. This was a surprising result, as we expected CTF data to serve as a ground truth for localization accuracy. While we are unsure of the root cause, we suspect that there is a systematic error in the phantom's construction. This could have been caused by re-assembly from Halifax to Philidelphia. This may have offset the positions of the HPI or ECD coils, causing the bias. There was no obserable bias in the HPI coils in a set direction, although Figure 5 suggests an inward shift in the radial direction. Given Figures 1-4 suggest clean data, this likely points to mechanical errors within the phantom.
 
 ### Future Direction 
 
-Immediate next steps include a redesign of the phantom. New builds are already in progress, and will need to be tested to ensure accuracy across multiple sites (Halifax, Stockhold, Netherlands). More capabilites (different frequency simultaneous waves, increased dipoles, stronger structure) may be implemented to continue advancing this device. The continued development of the phantom is vital to future MEG system validation. 
+Immediate next steps include a redesign of the phantom platform. New builds are already in progress, and will need to be tested to ensure accuracy across multiple sites (Halifax, Stockholm, Netherlands). More capabilites (different frequency simultaneous waves, increased dipoles, stronger structure) may be implemented to continue advancing this device. The continued development of the phantom is vital to future MEG system validation. 
 
 ## References
 
