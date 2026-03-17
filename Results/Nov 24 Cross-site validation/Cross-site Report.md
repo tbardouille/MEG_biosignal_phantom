@@ -28,7 +28,8 @@ Advances in quantum magnetometry are increasing the global adoption of magnetoen
 </figcaption>
 
 </figure>
- ## Methods:
+ 
+## Methods:
 
 ### Theory 
 The phantom contains both equivalent current dipole (ECD) and head position indicator (HPI) coils. To model the ECDs, we express the primary current density, $J_p(r)$ as:
@@ -61,7 +62,7 @@ The induced magnetic field from this configuration, via Biot-Savart law, is:
 </p>
 
 
-where $m$ is the magnetic dipole moment. In order to evaluate position and orientation of the ECDs, we optimize $Q$ and $r_Q$ to minimize least-squared error between the measured and predicted fields (Eq. 2). Likewise, the HPI coil position and orientation are given by an optimization of $m$ and $r_Q$ using Eq. 4. The solutions to this optimization are given in our MEG patient helmet's coordinate frame. We use a transformation matrix to map these coordinates directly to the phantom's frame. Localization error (LE) is calculated by finding the difference between measured and expected positions:
+where $'m'$ is the magnetic dipole moment. In order to evaluate position and orientation of the ECDs, we optimize $'Q'$ and $'r_Q'$ to minimize least-squared error between the measured and predicted fields (Eq. 2). Likewise, the HPI coil position and orientation are given by an optimization of $'m'$ and $'r_Q'$ using Eq. 4. The solutions to this optimization are given in our MEG patient helmet's coordinate frame. We use a transformation matrix to map these coordinates directly to the phantom's frame. Localization error (LE) is calculated by finding the difference between measured and expected positions:
 
 <p align="center">
   <img src="Equations/Equation 5.png" alt="image" />
@@ -103,8 +104,8 @@ and then our bias is calculated via:
 where $\delta d_j$ is the standard deviation of the directional displacement. These two quantities inform our measurement accuracy and validate our phantom.
 ### Setup and acquisition:
  To evaluate the phantom, the device was and circuitry were manufactured (see Build Instructions.md and Circuit Layout.png) and transported via plane from Halifax to Philidelphia. Our phantom contains four head position indicator (HPI) coils and four equivalent current dipole (ECD) coils.
- At CHOP, we conducted a fixed current dipole magnitude experiment, first using a CTF SQUID MEG system and then with an OPM system in the same magnetic shielded room. The fixed magnitude was set to 17 nAm. For the CTF system, we omitted the 1000 nAm current dipole so there are 12 OPM and 11 CTF variable dipole recordings. The phantom was roughly centered within the helmet, however the phantom was not mounted to the sensor array for experiments at CHOP. Phantom position was known only via HPI localization. During the twelve repetitions of the fixed dipole magnitude experiment, the phantom was intentionally displaced slightly before each dataset was collected. 
-Both MEG systems at CHOP employed full head sensor arrays with single-axis sensors. The CTF MEG system contained 276 sensors and recorded at 1200 Hz, while the OPM system contained 114 sensors and recorded at 5000 Hz. A scan consisted of applying 100 repitions of an x hz sin wave to our eight dipoles in succesion, starting with our HPI coils. 
+ At CHOP, we conducted a fixed current dipole magnitude experiment, first using a CTF SQUID MEG system and then with an OPM system in the same magnetic shielded room. The fixed magnitude was set to 50 nAm. For the CTF system, we omitted the 1000 nAm current dipole so there are 12 OPM and 11 CTF variable dipole recordings. The phantom was roughly centered within the helmet, however the phantom was not mounted to the sensor array for experiments at CHOP. Phantom position was known only via HPI localization. During the twelve repetitions of the fixed dipole magnitude experiment, the phantom was intentionally displaced slightly before each dataset was collected. 
+Both MEG systems at CHOP employed full head sensor arrays with single-axis sensors. The CTF MEG system contained 276 sensors and recorded at 1200 Hz, while the OPM system contained 114 sensors and recorded at 5000 Hz. A scan consisted of applying 100 repetitions of a 5 hz cosine wave to our eight dipoles in succesion, starting with our HPI coils. 
 
 
 ### OPM Data Processing 
@@ -167,7 +168,7 @@ Here, we can see a strong evoked dipole response. Similarily, Figure 4 displays 
 Using the evoked responses, localization accuracies for both the HPI and ECD coils were calculated by averaging over all trials and summarized in Table 1. This table includes a direct comparison for the OPM and CTF data. Table 2 shows the same data, split into directional components $d$.
 <figure>
 <figcaption>
-<b>Table 1:</b> OPM vs CTF Localization statistics. Here, source represents the type of dipole and index combined. LE represents localization accuracy.
+<b>Table 1:</b> OPM vs CTF Localization statistics. Here, source represents the type of dipole and index combined. LE represents localization accuracy. Values are reported as mean &plusmn; standard deviation.
 </figcaption>
 <table>
 <thead>
@@ -200,7 +201,7 @@ Using the evoked responses, localization accuracies for both the HPI and ECD coi
 
 <figure>
 <figcaption>
-<b>Table 2:</b> Directional localization error components for OPM and CTF systems. Directional components are reported using <i>d</i><sub>j</sub> notation.
+<b>Table 2:</b> Directional localization error components for OPM and CTF systems. Directional components are reported using <i>d</i><sub>j</sub> notation. Values are reported as mean &plusmn; standard deviation.
 </figcaption>
 <table>
 <thead>
@@ -255,27 +256,23 @@ Table 3 compares the goodness of fit, HPI magnetic moments, and ECD amplitude fo
 <thead>
 <tr>
 <th>Source</th>
-<th>Index</th>
 <th>GOF_OPM (%)</th>
 <th>GOF_CTF (%)</th>
-<th>ECD_amplitude_OPM</th>
-<th>ECD_amplitude_CTF</th>
-<th>HPI_moment_OPM</th>
-<th>HPI_moment_CTF</th>
+<th>Amplitude/Moment_OPM</th>
+<th>Amplitude/Moment_CTF</th>
 </tr>
 </thead>
 <tbody>
-<tr><td>HPI</td><td>1</td><td>99.67</td><td>99.66</td><td></td><td></td><td>3.907</td><td>3.420</td></tr>
-<tr><td>HPI</td><td>2</td><td>99.47</td><td>99.54</td><td></td><td></td><td>3.480</td><td>3.330</td></tr>
-<tr><td>HPI</td><td>3</td><td>99.97</td><td>99.86</td><td></td><td></td><td>2.940</td><td>4.370</td></tr>
-<tr><td>HPI</td><td>4</td><td>99.85</td><td>99.82</td><td></td><td></td><td>3.343</td><td>4.430</td></tr>
-<tr><td>ECD</td><td>1</td><td>92.29</td><td>92.44</td><td>34.30</td><td>30.80</td><td></td><td></td></tr>
-<tr><td>ECD</td><td>2</td><td>93.53</td><td>83.99</td><td>35.00</td><td>37.50</td><td></td><td></td></tr>
-<tr><td>ECD</td><td>3</td><td>94.23</td><td>75.14</td><td>40.60</td><td>44.60</td><td></td><td></td></tr>
-<tr><td>ECD</td><td>4</td><td>94.14</td><td>91.47</td><td>35.80</td><td>30.80</td><td></td><td></td></tr>
+<tr><td>HPI 1</td><td>99.67</td><td>99.66</td><td>3.907</td><td>3.420</td></tr>
+<tr><td>HPI 2</td><td>99.47</td><td>99.54</td><td>3.480</td><td>3.330</td></tr>
+<tr><td>HPI 3</td><td>99.97</td><td>99.86</td><td>2.940</td><td>4.370</td></tr>
+<tr><td>HPI 4</td><td>99.85</td><td>99.82</td><td>3.343</td><td>4.430</td></tr>
+<tr><td>ECD 1</td><td>92.29</td><td>92.44</td><td>34.30</td><td>30.80</td></tr>
+<tr><td>ECD 2</td><td>93.53</td><td>83.99</td><td>35.00</td><td>37.50</td></tr>
+<tr><td>ECD 3</td><td>94.23</td><td>75.14</td><td>40.60</td><td>44.60</td></tr>
+<tr><td>ECD 4</td><td>94.14</td><td>91.47</td><td>35.80</td><td>30.80</td></tr>
 </tbody>
 </table>
-
 </figure>
 To better analyze the bias between trials, we can evaluate the HPI localizations across all datasets. To better observe localization errors, we translated each data point inward such that the expected radius is reduced by 4.75 cm. This allows us to clearly see differences between each dataset, and is shown in Figure 5.
 
