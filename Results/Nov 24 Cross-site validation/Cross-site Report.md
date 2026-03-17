@@ -37,7 +37,10 @@ The phantom contains both equivalent current dipole (ECD) and head position indi
 <p align="center">
   <img src="Equations/Equation 1.png" alt="image" />
 </p>
-where $Q$ is the current dipole moment, and $r_Q$ is the position at $Q$. From this, we can express the forward solution (as seen by the sensors) as:
+
+where $Q$ is the current dipole moment, and $r_Q$ is the position of $Q$. 
+From this, we can express the forward solution (as seen by the sensors) as:
+
 
 <p align="center">
   <img src="Equations/Equation 2.png" alt="image" />
@@ -62,7 +65,7 @@ The induced magnetic field from this configuration, via Biot-Savart law, is:
 </p>
 
 
-where $'m'$ is the magnetic dipole moment. In order to evaluate position and orientation of the ECDs, we optimize $'Q'$ and $'r_Q'$ to minimize least-squared error between the measured and predicted fields (Eq. 2). Likewise, the HPI coil position and orientation are given by an optimization of $'m'$ and $'r_Q'$ using Eq. 4. The solutions to this optimization are given in our MEG patient helmet's coordinate frame. We use a transformation matrix to map these coordinates directly to the phantom's frame. Localization error (LE) is calculated by finding the difference between measured and expected positions:
+where $m$ is the magnetic dipole moment. In order to evaluate position and orientation of the ECDs, we optimize $Q$ and $r_Q$ to minimize least-squared error between the measured and predicted fields (Eq. 2). Likewise, the HPI coil position and orientation are given by an optimization of $m$ and $r_Q$ using Eq. 4. The solutions to this optimization are given in our MEG patient helmet's coordinate frame. We use a transformation matrix to map these coordinates directly to the phantom's frame. Localization error (LE) is calculated by finding the difference between measured and expected positions:
 
 <p align="center">
   <img src="Equations/Equation 5.png" alt="image" />
@@ -256,10 +259,10 @@ Table 3 compares the goodness of fit, HPI magnetic moments, and ECD amplitude fo
 <thead>
 <tr>
 <th>Source</th>
-<th>GOF_OPM (%)</th>
-<th>GOF_CTF (%)</th>
-<th>Amplitude/Moment_OPM</th>
-<th>Amplitude/Moment_CTF</th>
+<th>GOF (OPM) (%)</th>
+<th>GOF (CTF) (%)</th>
+<th>Amplitude/Moment (OPM)</th>
+<th>Amplitude/Moment (CTF)</th>
 </tr>
 </thead>
 <tbody>
