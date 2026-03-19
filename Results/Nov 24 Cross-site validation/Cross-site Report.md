@@ -240,12 +240,11 @@ Using the evoked responses, localization accuracies for both the HPI and ECD coi
 </figure>
 
 
-</figure>
 
 From this table, we see that the localization accuracy of HPI coils was lower for the CTF system than the OPM system (1 vs 2 mm). There was no obvious directional bias for either system. For the ECDs, the OPM system localized to 4-5 mm, while the CTF system was between 7-9 mm. In both systems, there was an observed bias in the -Y direction, greater in the CTF system. This is more evident in Table 2, which compares the localization error across each dimension. 
 
 
-</figure>
+
 Table 3 compares the goodness of fit, HPI magnetic moments, and ECD amplitude for the CTF and OPM systems. 
 
 <figure>
@@ -293,7 +292,8 @@ To better analyze the bias between trials, we can evaluate the HPI localizations
 ## Discussion
 
 ### Comparison of Datasets
-After analyzing the data, there is a clear bias in the -$d_y$ localization errors of the ECD coils. This is present across all ECD dipoles, being ~ 3 mm for OPM data and ~ 5 mm for CTF data. This was a surprising result, as we expected CTF data to serve as a ground truth for localization accuracy. While we are unsure of the root cause, we suspect that there is a systematic error in the phantom's construction. This could have been caused by re-assembly from Halifax to Philadelphia. This may have offset the positions of the HPI or ECD coils, causing the bias. There was no observable bias in the HPI coils in a set direction, although Figure 5 suggests an inward shift in the radial direction. Given Figures 1-4 suggest clean data, this likely points to mechanical errors within the phantom.
+
+After analyzing the data, there is a clear bias in the $-d_y$ localization errors of the ECD coils. This is present across all ECD dipoles, being ~ 3 mm for OPM data and ~ 5 mm for CTF data. This was a surprising result, as we expected CTF data to serve as a ground truth for localization accuracy. While we are unsure of the root cause, we suspect that there is a systematic error in the phantom's construction. This could have been caused by re-assembly from Halifax to Philadelphia. This may have offset the positions of the HPI or ECD coils, causing the bias. There was no observable bias in the HPI coils in a set direction, although Figure 5 suggests an inward shift in the radial direction. Given Figures 1-4 suggest clean data, this likely points to mechanical errors within the phantom.
 
 ### Future Direction 
 
