@@ -72,49 +72,47 @@ where $m$ is the magnetic dipole moment. In order to evaluate position and orien
 </p>
 
 
+while taking the absolute value gives the localization error for a given dipole:
 
-such that the mean localization error is given by:
 
 <p align="center">
   <img src="Equations/Equation 6.png" alt="image" />
 </p>
 
 
-We also evaluate the directional bias associated with measurements to compliment localization accuracy. To achieve this, we first measure the directional displacement $d$ for a given direction and measurement $j,i$. This is formulated as:
+and the mean localization error is given by:
+
 
 <p align="center">
   <img src="Equations/Equation 7.png" alt="image" />
 </p>
 
 
-such that the mean becomes:
+We also evaluate the directional bias associated with measurements to compliment localization accuracy. To achieve this, we first measure the directional displacement $d$ for a given direction and measurement $j,i$. This is formulated as:
 
 <p align="center">
   <img src="Equations/Equation 8.png" alt="image" />
 </p>
 
 
-and then our bias is calculated via:
+such that the mean becomes:
 
 <p align="center">
   <img src="Equations/Equation 9.png" alt="image" />
 </p>
 
 
-
-
-
-where $\delta d_j$ is the standard deviation of the directional displacement. These two quantities inform our measurement accuracy and validate our phantom.
+We then assess bias by comparing the standard deviation in a given measurement to its mean. These two quantities inform our measurement accuracy and validate our phantom.
 ### Setup and acquisition:
  To evaluate the phantom, the device and circuitry were manufactured (see Build Instructions.md and Circuit Layout.png) and transported via plane from Halifax to Philadelphia. Our phantom contains four head position indicator (HPI) coils and four equivalent current dipole (ECD) coils.
- At CHOP, we conducted a fixed current dipole magnitude experiment, first using a CTF SQUID MEG system and then with an OPM system in the same magnetic shielded room. The fixed ECD magnitude was set to 50 nAm. For the CTF system, we omitted the 1000 nAm current dipole so there are 12 OPM and 11 CTF variable dipole recordings. The phantom was roughly centered within the helmet, however the phantom was not mounted to the sensor array for experiments at CHOP. Phantom position was known only via HPI localization. During the twelve repetitions of the fixed dipole magnitude experiment, the phantom was intentionally displaced slightly before each dataset was collected. 
+ At CHOP, we conducted a fixed current dipole magnitude experiment, first using a CTF SQUID MEG system and then with an OPM system in the same magnetic shielded room. The fixed ECD magnitude was set to 50 nAm. The phantom was roughly centered within the helmet, however the phantom was not mounted to the sensor array for experiments at CHOP. Phantom position was known only via HPI localization. During the twelve repetitions of the fixed dipole magnitude experiment, the phantom was intentionally displaced slightly before each dataset was collected. 
 Both MEG systems at CHOP employed full head sensor arrays with single-axis sensors. The CTF MEG system contained 276 sensors and recorded at 1200 Hz, while the OPM system contained 114 sensors and recorded at 5000 Hz. A scan consisted of applying 100 repetitions of a 5 Hz cosine wave to our eight dipoles in succession, starting with our HPI coils. 
 
 
 ### OPM Data Processing 
-Once acquired, OPM data were processed using MNE-Python version 1.11.0. To start, we loaded raw FIF data and extracted stimulus onsets from the driver/stim channel using peak detection (SciPy v 1.15.1) with 100-sample minimum peak-peak distance and a 0.4 s event time.. Continuous noise data were cleaned by applying a 60 Hz line-noise notch filter and a 3–20 Hz band-pass filter in MNE-Python and inspecting time courses and power spectra using MNE-Python with Matplotlib to manually identify and remove noisy or faulty channels. Before localization reference array regression (RAR) and homogeneous field correction (HFC) (Tierney et al., 2021) were applied to better filter environmental signals. Finally data were epoched around each event with applied baseline correction between -0.200 s and -0.150 s, then averaged over our 100 trials.
+Once acquired, OPM data were processed using MNE-Python version 1.11.0. To start, we loaded raw FIF data and extracted stimulus onsets from the driver/stim channel using peak detection (SciPy v 1.15.1) with 100-sample minimum peak-peak distance and a 0.4 s event time.. Continuous noise data were cleaned by applying a 60 Hz line-noise notch filter and a 3–20 Hz band-pass filter in MNE-Python and inspecting time courses and power spectra using MNE-Python with Matplotlib to manually identify and remove noisy or faulty channels. Before localization, reference array regression (RAR) and homogeneous field correction (HFC) (Tierney et al., 2021) were applied to better filter environmental signals. Finally data were epoched around each event with applied baseline correction between -0.200 s and -0.150 s, then averaged over our 100 trials.
 ### CTF Data Processing 
-Similar to the OPM data, CTF scans and were preprocessed using MNE-python, although our process differed for the HPI and ECD coils. HPI scans were filtered using 3rd order synthetic gradient compensation, and bandpassed between 1 and 20 Hz. Epochs were baselined between -0.175 s and -0.125 s and averaged to create our evoked responses. For the ECD scans, we applied zeroth order gradient compensation and temporal signal space separation (tSSS) (Holmes et al., 2023) in 10 s increments. Data were then low passed using a fourth order Butterworth filter at 30 Hz. For both ECD and HPI scans, peak detection remained consistent with OPM data. Datasets 6-11 included a double activation, meaning HPI dipoles 1 and 2 were active at the same time. To remedy this, half of the sensors (split by hemisphere) were ignored for all double activation trials when localizing HPI 1 or 2. 
+Similar to the OPM data, CTF scans and were preprocessed using MNE-python, although our process differed for the HPI and ECD coils. HPI scans were filtered using 3rd order synthetic gradient compensation, and bandpassed between 1 and 20 Hz. Epochs were baselined between -0.175 s and -0.125 s and averaged to create our evoked responses. For the ECD scans, we applied zeroth order gradient compensation and temporal signal space separation (tSSS) (Taulu et al., 2006) in 10 s increments. Data were then low passed using a fourth order Butterworth filter at 30 Hz. For both ECD and HPI scans, peak detection remained consistent with OPM data. Datasets 6-11 included a double activation, meaning HPI dipoles 1 and 2 were active at the same time. To remedy this, half of the sensors (split by hemisphere) were ignored for all double activation trials when localizing HPI 1 or 2. 
 
 ### Localization
 HPI localization followed the same procedure for both OPM and CTF datasets. Once epochs were obtained, we estimate the position and orientation of a magnetic dipole from measured MEG magnetic field data. An initial estimate of the dipole position is first defined to guide the optimization. The geometry of the MEG sensors is then constructed from the measurement information so that the physical location and orientation of each coil is known. To properly weight the measurements during fitting, a noise covariance model is used to compute a whitening transformation, which normalizes the sensor data according to the expected noise level in each channel. This "ad-hoc" whitener is computed via MNE-Covariance. 
@@ -352,6 +350,9 @@ Wearable OPM-MEG: A changing landscape for epilepsy.
 Tanaka, K., Tsukahara, A., Miyanaga, H., Tsunematsu, S., Kato, T., Matsubara, Y., & Sakai, H. (2024).  
 Superconducting self-shielded and zero-boil-off magnetoencephalogram systems: A dry phantom evaluation.  
 *Sensors, 24*, 6044.
+
+Taulu S,Simola J (2006): Spatiotemporal signal space separation method for rejecting nearby interference in MEG measurements.
+*Phys Med Biol, 51*, 1759–1768.
 
 Tierney, T. M., Holmes, N., Mellor, S., López, J. D., Roberts, G., Hill, R. M., Boto, E., Leggett, J., Shah, V., Brookes, M. J., et al. (2019).  
 Optically pumped magnetometers: From quantum origins to multi-channel magnetoencephalography.  
