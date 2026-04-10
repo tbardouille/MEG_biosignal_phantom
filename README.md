@@ -14,15 +14,18 @@ The phantom has two types of sources:  short, straight wire segments (modelled a
 
 ## What is in this repository?
 
-* README.md - this file
-* Build Instructions.md - markdown instructions for building the phantom
-* phantom-Platform.stl - a 3D printable file containing the phantom platform
-* gerbers - a folder containing files necessary to print the printed circuit board (PCB)
-* phantomDrive_V4.ino - Arduino code to run the current driver (i.e., activate sources)
-* Circuit Layout.png - a circuit diagram for the current driver 
-* designFiles - a folder containing FreeCAD and KiCAD design files
-	+ if you edit the design, please share this back to the repo
-* pictures - a folder including pictures using in markdown files
+* <b>README.md</b> - this file
+* <b>phantomVersion1</b> - folder containing the first version of the PCB phantom
+	+ Build Instructions.md - markdown instructions for building the phantom
+	+ phantom-Platform.stl - a 3D printable file containing the phantom platform
+	+ gerbers - a folder containing files necessary to print the printed circuit board (PCB)
+	+ phantomDrive_V4.ino - Arduino code to run the current driver (i.e., activate sources)
+	+ Circuit Layout.png - a circuit diagram for the current driver 
+	+ designFiles - a folder containing FreeCAD and KiCAD design files
+	+ if you edit the design, please share this back to the repo (<b>under Contributors</b>)
+* <b>pictures</b> - a folder including pictures used in markdown files
+* <b>Results</b> - markdown files describing findings with various phantom builds
+* <b>Contributors</b> - a folder for contriibuting sites to keep their development files
 
 ## Validation Results
 
