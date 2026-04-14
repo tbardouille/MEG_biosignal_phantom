@@ -47,7 +47,7 @@ Take the following steps to order the PCB board from JLCPCB:
 
 - sign up or sign in to <https://jlcpcb.com>
 - click on the "order now" button
-- click to upload the gerber file, specify the [uno_current_driver-v1.1.zip](./gerber/uno_current_driver-v1.1.zip) file
+- click to upload the gerber file, specify the [uno_current_driver-v1.1.zip](./gerbers/uno_current_driver-v1.1.zip) file
 - it will automatically detect the size of the PCB boards
 - all the defaults are fine (2 layers, etc)
 - review your order and proceed to payment
