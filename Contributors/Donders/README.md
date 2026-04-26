@@ -1,7 +1,7 @@
 ---
 meta:
     author: Robert Oostenveld
-    topic: MEG Phantom Design Work
+    topic: MEG Phantom Current Driver
 ---
 
 # Donders Institute Lab Workspace
@@ -32,10 +32,9 @@ This shows a small piece of the phantom MEG signal recorded with the Donders CTF
 
 This is the first attempt at making a PCB board out of it. Instead of the RP2040, I figured that an Arduino Uno would be a better base platform to start with, since it is so widely used. The current driver board is stacked on the Uno. Since the DAC7578 can be configured with three I2C addresses, it is possible to stack three current driver boards to achieve 24 channels.
 
-<img src="./pictures/uno-v1.0_rendering.png" width="400">
-
-<img src="./pictures/uno-v1.0_board.png" width="200">
-<img src="./pictures/uno-v1.0_schematic.png" width="200">
+<img src="./pictures/uno-v1.0_rendering.png" width="400">  
+<img src="./pictures/uno-v1.0_board.png" width="200">  
+<img src="./pictures/uno-v1.0_schematic.png" width="200">  
 
 Regretfully when the boards arrived from JLCBCP, I found out that I made an error and rotated one of the headers for the DAC7578 breakout board.
 
@@ -43,16 +42,18 @@ Regretfully when the boards arrived from JLCBCP, I found out that I made an erro
 
 Version 1.1 of the Arduino Uno current driver board looks similar to the previous version 1.0, but has the headers for the DAC7578 breakout board in the correct orientation.
 
-Take the following steps to order the PCB board from JLCPCB:
+The additional parts can be ordered using this [parts list](https://www.digikey.nl/nl/mylists/list/SOTPC1JBBO) at DigiKey, or from other electronic component vendors like RS-Online, Mouser, Farnell, or Arrow.
+
+To order the PCB board from JLCPCB, you have to follow these steps:
 
 - sign up or sign in to <https://jlcpcb.com>
 - click on the "order now" button
 - click to upload the gerber file, specify the [uno_current_driver-v1.1.zip](./gerbers/uno_current_driver-v1.1.zip) file
-- it will automatically detect the size of the PCB boards
-- all the defaults are fine (2 layers, etc)
+- it will automatically detect the size of the PCB board
+- the JLCPCB default settings are fine (2 layers, etc)
 - review your order and proceed to payment
 
-<img src="./pictures/jlcpcb1.png" width="400">
-<img src="./pictures/jlcpcb2.png" width="400">
-<img src="./pictures/jlcpcb3.png" width="400">
-<img src="./pictures/jlcpcb4.png" width="400">
+<img src="./pictures/jlcpcb1.png" width="400">  
+<img src="./pictures/jlcpcb2.png" width="400">  
+<img src="./pictures/jlcpcb3.png" width="400">  
+<img src="./pictures/jlcpcb4.png" width="400">  
