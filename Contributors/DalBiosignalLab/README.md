@@ -1,3 +1,10 @@
+---
+meta:
+    author: Tim Bardouille
+    topic: MEG Phantom Current Driver
+---
+
+
 # MEG Biosignal Phantom v3 Build Guide
 
 This guide documents the assembly and initial bench testing of the MEG Biosignal Phantom v3 in the Dalhousie Biosignal Laboratory. The build uses an Arduino Uno R3 and three Donders current-driver shields, each containing an eight-channel DAC7578 module. The assembled system provides up to 24 driver channels; the number of connected phantom sources depends on the head and cable configuration.
