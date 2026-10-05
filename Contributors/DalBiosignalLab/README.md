@@ -1,7 +1,7 @@
 ---
 meta:
     author: Tim Bardouille
-    topic: MEG Phantom Current Driver
+    topic: MEG Dry Phantom
 ---
 
 
