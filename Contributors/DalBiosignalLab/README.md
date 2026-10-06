@@ -140,3 +140,6 @@ An eight-channel DAC needs documented output and return connections. The phrase 
 The earlier manual cites Oyama et al. (2015), Oyama et al. (2019), Hämäläinen et al. (1993), and Bardouille et al., *Sensors* (2024) for the dry-phantom background and earlier prototype work. Those references provide context; they do not constitute validation of this v3 assembly.
 
 Only photographs presented as the lab's build or test setup are included here. The earlier reference image identified in the correspondence as the developer's hand and keyboard has been omitted.
+
+
+The pipeline for connecting the wire is that you solder the wires to the quater board PCBs before butting them in the frame, then pass the wires through the frame and slide the PCBs in. Once all the wires are out, start twisting them. 
