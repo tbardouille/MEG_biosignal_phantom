@@ -14,16 +14,8 @@ The Phantom assembly has three main components.
 #### 2. Getting the Phantom frame using a 3-D printer and getting custom PCBs that are designed to work with the frame. 
 #### 3. Connection station that connects the driver to the phantom using non-magnetic insulated copper wire. 
 
-# 1. Building the Driver
-## 1. Design files and materials
-
-The phantom frame and current-dipole PCBs can be build and ordered using the links below.
-Phantom Frame: https://github.com/tbardouille/MEG_biosignal_phantom/tree/main/Contributors/DalBiosignalLab/3dmodels
-
-
-Current dipole PCBs and HPI: https://github.com/tbardouille/MEG_biosignal_phantom/tree/main/Contributors/Karolinska
-
-<img width="296" height="510" alt="Screenshot 2026-09-29 at 1 12 35 PM" src="https://github.com/user-attachments/assets/2870f3c3-57f5-4823-8ed7-2152dd06af30" />
+## 1. Building the Driver
+### 1. Design files and materials
 
 Use the [Donders contribution directory](https://github.com/tbardouille/MEG_biosignal_phantom/tree/main/Contributors/Donders) for the current-driver design and parts information. Record the exact design revision or Git commit used for each build.
 
@@ -43,7 +35,7 @@ Do not substitute the component list from the previous relay-based phantom drive
 <img width="914" height="514" alt="assembled-shields" src="https://github.com/user-attachments/assets/e58be182-5a72-474a-aeb9-49e6dfb0983a" />
 
 Once you get all the components of the driver, perform a dry fit and make sure that everything is assembled similar to the shield above, However please follow the next steps before soldering.  
-## 3. Configure the DAC addresses before mounting the modules
+### 2. Configure the DAC addresses before mounting the modules
 
 Each shield shares the Arduino's I²C bus. Each DAC7578 must have a different address so the firmware can address the shields independently.
 
@@ -63,10 +55,10 @@ The [Adafruit address-jumper instructions](https://learn.adafruit.com/adafruit-d
 4. Inspect the jumper for unintended bridges.
 
 **Lesson from this build:** 
-#### 1.The first two shields initially used the same default address. The firmware reported them as one device, and the outputs showed the same current and frequency response. The address jumper was difficult to access after assembly, requiring rework. Configure unique addresses first to avoid this problem.
+#### 1. The first two shields initially used the same default address. The firmware reported them as one device, and the outputs showed the same current and frequency response. The address jumper was difficult to access after assembly, requiring rework. Configure unique addresses first to avoid this problem.
 #### 2. Keep the resistor pins after soldering long enough for an alligator clip (for setting the resistors).
 
-## 4. Assemble the current-driver shields
+### 3. Assemble the current-driver shields
 
 1. Lay out the components for one shield and check them against the v1.1 parts list.
 2. Identify component positions and orientations from the schematic and PCB markings. Confirm resistor values against the design; they are not specified in the rough notes.
@@ -79,7 +71,7 @@ The [Adafruit address-jumper instructions](https://learn.adafruit.com/adafruit-d
 
 Soldering guidance for the original lab build was provided by Jon, the engineering expert consulted during assembly. Seek experienced help if the board layout or module orientation is unclear.
 
-## 5. Install the Arduino firmware
+## 4. Install the Arduino firmware
 
 Use the [uno_dac7578 firmware directory](https://github.com/robertoostenveld/arduino/tree/main/uno_dac7578) for the Uno-based system. The developer correspondence in the notes states that this firmware supports Uno or Leonardo boards and automatically detects one, two, or three shields.
 
@@ -95,7 +87,7 @@ The `rp2040_dac7578` sketch belongs to the earlier RP2040-based controller and w
 8. Record the firmware commit, IDE version, library versions, and serial startup output.
 
 
-## 6. Test the shields individually and as a stack
+## 5. Test the shields individually and as a stack
 
 The following sequence is a recommended verification procedure. The source notes show bench testing, but do not record a complete test dataset or acceptance tolerances.
 
@@ -114,11 +106,11 @@ Where current is inferred from a voltage measurement across a known resistor, us
 
 *Bench testing shown in the build notes. This image documents the setup; it does not establish calibrated amplitude or frequency accuracy.*
 
-<img width="661" height="1175" alt="three-shield-stack" src="https://github.com/user-attachments/assets/ba41f36a-e894-4845-969e-73a3c63d47be" />
+<img width="661" height="493" alt="three-shield-stack" src="https://github.com/user-attachments/assets/eaa12724-e1ba-46b6-b2b0-784d78e204b0" />
 
 *The build entry dated 22 September 2026 identifies the top shield as Board 3 and refers to testing its eighth channel.*
 
-## 7. Prepare and document the phantom cable
+## 6. Prepare and document the phantom cable
 
 The notes describe a connecting wire assembly and identify grey as channel 1 and brown as channel 8 for individual boards. They also refer to a conductor written as “pick” for “output/ground”; the intended colour and electrical function are ambiguous and must be checked physically.
 
@@ -129,7 +121,7 @@ An eight-channel DAC needs documented output and return connections. The phrase 
 
 *Cable connection photographed during the build. Connector orientation and pin assignments still require a written pinout.*
 
-## 8. Connect the phantom and prepare for MEG use
+## 7. Connect the phantom and prepare for MEG use
 
 1. Disconnect power and check that the frame and current-dipole PCBs are secure.
 2. Check the completed cable against the documented output and return mapping.
@@ -138,11 +130,24 @@ An eight-channel DAC needs documented output and return connections. The phrase 
 5. Keep the driver electronics outside the magnetic shield. The previous phantom manual specifies placing the junction at least 1 m from the sensor array; use this as inherited setup guidance and confirm the cable routing and separation for the v3 experiment.
 
 
-The earlier manual cites Oyama et al. (2015), Oyama et al. (2019), Hämäläinen et al. (1993), and Bardouille et al., *Sensors* (2024) for the dry-phantom background and earlier prototype work. Those references provide context; they do not constitute validation of this v3 assembly.
-
-Only photographs presented as the lab's build or test setup are included here. The earlier reference image identified in the correspondence as the developer's hand and keyboard has been omitted.
 
 
-The pipeline for connecting the wire is that you solder the wires to the quater board PCBs before butting them in the frame, then pass the wires through the frame and slide the PCBs in. Once all the wires are out, start twisting them. 
+## 2. Phantom frame and custom PCBs
+The phantom frame can be built, and current-dipole and HPI PCBs can be ordered using the links below.
+
+Phantom Frame: https://github.com/tbardouille/MEG_biosignal_phantom/tree/main/Contributors/DalBiosignalLab/3dmodels
+
+
+Current dipole PCBs and HPI: https://github.com/tbardouille/MEG_biosignal_phantom/tree/main/Contributors/Karolinska
+
+<img width="296" height="510" alt="Screenshot 2026-09-29 at 1 12 35 PM" src="https://github.com/user-attachments/assets/2870f3c3-57f5-4823-8ed7-2152dd06af30" />
+
+Once these parts are received and assembled, we move on to making the connection between the frame and drivers. 
+
+**Key Note:** The V3 frame and PCBs are designed such that one should start making connections at the current-dipole and HPI PCBs first, and then move towards the connections at the drivers. *The pipeline for connecting the wire is that you solder the wires to the quarter-board PCBs before butting them in the frame, then pass the wires through the frame and slide the PCBs in. Once all the wires are out, start twisting them.*
+
+The earlier manual cites Oyama et al. (2015), Oyama et al. (2019), Hämäläinen et al. (1993), and Bardouille et al., *Sensors* (2024) for the dry-phantom background and earlier prototype work. Those references provide context. Only photographs presented as the lab's build or test setup are included here.
+
+
 
 Next steps
