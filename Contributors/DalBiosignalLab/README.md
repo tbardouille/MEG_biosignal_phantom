@@ -143,3 +143,5 @@ Only photographs presented as the lab's build or test setup are included here. T
 
 
 The pipeline for connecting the wire is that you solder the wires to the quater board PCBs before butting them in the frame, then pass the wires through the frame and slide the PCBs in. Once all the wires are out, start twisting them. 
+
+Next steps
