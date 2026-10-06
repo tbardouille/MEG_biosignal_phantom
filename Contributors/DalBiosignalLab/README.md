@@ -61,7 +61,9 @@ The [Adafruit address-jumper instructions](https://learn.adafruit.com/adafruit-d
 3. Make the required solder bridge on each module. Do not bridge the centre pad to both outer pads.
 4. Inspect the jumper for unintended bridges.
 
-**Lesson from this build:** The first two shields initially used the same default address. The firmware reported them as one device, and the outputs showed the same current and frequency response. The address jumper was difficult to access after assembly, requiring rework. Configure unique addresses first to avoid this problem.
+**Lesson from this build:** 
+#### 1.The first two shields initially used the same default address. The firmware reported them as one device, and the outputs showed the same current and frequency response. The address jumper was difficult to access after assembly, requiring rework. Configure unique addresses first to avoid this problem.
+#### 2. Keep the resistor pins after soldering long enough for an alligator clip (for setting the resistors).
 
 ## 4. Assemble the current-driver shields
 
