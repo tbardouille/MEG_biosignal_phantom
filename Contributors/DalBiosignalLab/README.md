@@ -14,13 +14,14 @@ The Phantom assembly has three main components.
 #### 2. Getting the Phantom frame using a 3-D printer and getting custom PCBs that are designed to work with the frame. 
 #### 3. Connection station that connects the driver to the phantom using non-magnetic insulated copper wire. 
 
+# 1. Building the Driver
 ## 1. Design files and materials
 
 The phantom frame and current-dipole PCBs can be build and ordered using the links below.
 Phantom Frame: https://github.com/tbardouille/MEG_biosignal_phantom/tree/main/Contributors/DalBiosignalLab/3dmodels
 
 
-Current dipole PCBs: 
+Current dipole PCBs and HPI: https://github.com/tbardouille/MEG_biosignal_phantom/tree/main/Contributors/Karolinska
 
 <img width="296" height="510" alt="Screenshot 2026-09-29 at 1 12 35 PM" src="https://github.com/user-attachments/assets/2870f3c3-57f5-4823-8ed7-2152dd06af30" />
 
