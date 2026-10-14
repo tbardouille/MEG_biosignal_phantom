@@ -10,9 +10,9 @@ meta:
 This guide documents the assembly and initial bench testing of the MEG Biosignal Phantom v3 in the Dalhousie Biosignal Laboratory. The build uses an Arduino Uno R3 and three Donders current-driver shields, each containing an eight-channel DAC7578 module. The assembled system provides up to 24 driver channels; the number of connected phantom sources depends on the head and cable configuration.
 
 The Phantom assembly has three main components. 
-#### 1. Building the Driver using custom PCBs to generate sinusoidal current matching the characteristics of brain signals.
-#### 2. Getting the Phantom frame using a 3-D printer and getting custom PCBs that are designed to work with the frame. 
-#### 3. Connection station that connects the driver to the phantom using non-magnetic insulated copper wire. 
+#### 1. Building the driver using custom PCBs to generate sinusoidal current matching the characteristics of brain signals.
+#### 2. Creating the phantom frame using a 3-D printer and getting custom PCBs that are designed to work with the frame. 
+#### 3. Connecting the driver to the phantom PCBs using non-magnetic insulated copper wire. 
 
 ## 1. Building the Driver
 ### 1. Design files and materials
@@ -34,7 +34,8 @@ Use the [Donders contribution directory](https://github.com/tbardouille/MEG_bios
 Do not substitute the component list from the previous relay-based phantom driver. This build uses DAC7578 shields.
 <img width="914" height="514" alt="assembled-shields" src="https://github.com/user-attachments/assets/e58be182-5a72-474a-aeb9-49e6dfb0983a" />
 
-Once you get all the components of the driver, perform a dry fit and make sure that everything is assembled similar to the shield above, However please follow the next steps before soldering.  
+Once you get all the components of the driver, perform a dry fit and make sure that everything is assembled similar to the shield above, however please follow the next steps before soldering.
+
 ### 2. Configure the DAC addresses before mounting the modules
 
 Each shield shares the Arduino's I²C bus. Each DAC7578 must have a different address so the firmware can address the shields independently.
@@ -71,7 +72,7 @@ The [Adafruit address-jumper instructions](https://learn.adafruit.com/adafruit-d
 
 Soldering guidance for the original lab build was provided by Jon, the engineering expert consulted during assembly. Seek experienced help if the board layout or module orientation is unclear.
 
-## 4. Install the Arduino firmware
+### 4. Install the Arduino firmware
 
 Use the [uno_dac7578 firmware directory](https://github.com/robertoostenveld/arduino/tree/main/uno_dac7578) for the Uno-based system. The developer correspondence in the notes states that this firmware supports Uno or Leonardo boards and automatically detects one, two, or three shields.
 
@@ -86,8 +87,7 @@ The `rp2040_dac7578` sketch belongs to the earlier RP2040-based controller and w
 7. Open the Serial Monitor using the baud rate defined in the sketch.
 8. Record the firmware commit, IDE version, library versions, and serial startup output.
 
-
-## 5. Test the shields individually and as a stack
+### 5. Test the shields individually and as a stack
 
 The following sequence is a recommended verification procedure. The source notes show bench testing, but do not record a complete test dataset or acceptance tolerances.
 
@@ -110,7 +110,7 @@ Where current is inferred from a voltage measurement across a known resistor, us
 
 *The build entry dated 22 September 2026 identifies the top shield as Board 3 and refers to testing its eighth channel.*
 
-## 6. Prepare and document the phantom cable
+### 6. Prepare and document the phantom cable
 
 The notes describe a connecting wire assembly and identify grey as channel 1 and brown as channel 8 for individual boards. They also refer to a conductor written as “pick” for “output/ground”; the intended colour and electrical function are ambiguous and must be checked physically.
 
@@ -118,10 +118,9 @@ An eight-channel DAC needs documented output and return connections. The phrase 
 
 <img width="594" height="406" alt="cable-connected" src="https://github.com/user-attachments/assets/90e5f784-f2c8-4737-ba9d-95e033fa03a2" />
 
-
 *Cable connection photographed during the build. Connector orientation and pin assignments still require a written pinout.*
 
-## 7. Connect the phantom and prepare for MEG use
+### 7. Connect the phantom and prepare for MEG use
 
 1. Disconnect power and check that the frame and current-dipole PCBs are secure.
 2. Check the completed cable against the documented output and return mapping.
@@ -129,14 +128,11 @@ An eight-channel DAC needs documented output and return connections. The phrase 
 4. Confirm the startup, idle, and shutdown output behaviour of the selected firmware before placing the phantom in the MEG setup.
 5. Keep the driver electronics outside the magnetic shield. The previous phantom manual specifies placing the junction at least 1 m from the sensor array; use this as inherited setup guidance and confirm the cable routing and separation for the v3 experiment.
 
-
-
-
 ## 2. Phantom frame and custom PCBs
+
 The phantom frame can be built, and current-dipole and HPI PCBs can be ordered using the links below.
 
 Phantom Frame: https://github.com/tbardouille/MEG_biosignal_phantom/tree/main/Contributors/DalBiosignalLab/3dmodels
-
 
 Current dipole PCBs and HPI: https://github.com/tbardouille/MEG_biosignal_phantom/tree/main/Contributors/Karolinska
 
@@ -148,6 +144,19 @@ Once these parts are received and assembled, we move on to making the connection
 
 The earlier manual cites Oyama et al. (2015), Oyama et al. (2019), Hämäläinen et al. (1993), and Bardouille et al., *Sensors* (2024) for the dry-phantom background and earlier prototype work. Those references provide context. Only photographs presented as the lab's build or test setup are included here.
 
+## 3. Connecting the Drivers to the Phantom PCBs
+
+The Phantom v3 consists of eight custom PCBs, four current-dipole PCBS and four HPI PCBs. Each current-dipole PCB holds three current dipoles. Therefore, there are 16 total connections to be made between the driver and the phantom PCBs. 
+
+Thin 33 AWG wire is used for the phantom v3 PCB connections, with a junction board connecting the driver ribbon cable to the phantom PCB wire. The following steps provide details pertient to creating the required wiring and connections between the phantom PCBs, junction board, and driver ribbon cable. 
+
+### 1. Twisting current carrying wires
+
+In order to eliminate magnetic signal generated by the driver wires that may interfere with the current-dipole measurements, delivery and ground wires must be wound together. The steps below outline the steps necessary to create the current carrying wires for each of the 16 connections:
+
+For each set:
+1. 
 
 
-Next steps
+
+
