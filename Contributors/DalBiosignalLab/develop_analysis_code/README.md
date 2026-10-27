@@ -1,0 +1,1 @@
+This code requires MNE Python v.1.13.2 to run correctly. This is required for the magnetic dipole fitting functionality
